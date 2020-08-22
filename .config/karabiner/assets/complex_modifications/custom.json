@@ -1,0 +1,81 @@
+{
+  "title": "便利きのう",
+  "rules": [
+    {
+      "description": "CTRL-[を押したときに日本語入力を英数に切り替える。",
+        "manipulators": [
+          {
+            "type": "basic",
+            "from": {
+              "key_code": "open_bracket",
+                "modifiers": { "mandatory": "control" } },
+            "to": [ { "key_code": "escape" },
+              { "select_input_source": {
+                "language": "^en$"
+              } },
+              { "key_code": "escape" }
+            ],
+            "conditions": [
+              {
+                "type": "frontmost_application_if",
+                "bundle_identifiers": [ "^com\\.apple\\.Terminal$", "^org\\.vim\\.", "^com\\.googlecode\\.iterm2$", "^com\\.sublimetext\\.3$", "^org\\.gnu\\.Emacs$", "^io\\.alacritty$", "^com\\.google\\.android\\.studio$", "^com\\.microsoft\\.VSCode$"]
+              }, {
+              "type": "input_source_if",
+              "input_sources": [
+                { "language": "^ja$" }
+              ]
+              }
+            ]
+          }
+        ]
+    },
+    {
+      "description": "ESCを押したときに日本語入力を英数に切り替える。",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "escape" },
+          "to": [ { "key_code": "escape" },
+            { "select_input_source": {
+              "language": "^en$"
+            } },
+            { "key_code": "escape" }
+          ],
+          "conditions": [
+            {
+              "type": "frontmost_application_if",
+              "bundle_identifiers": [ "^com\\.apple\\.Terminal$", "^org\\.vim\\.", "^com\\.googlecode\\.iterm2$", "^com\\.sublimetext\\.3$", "^org\\.gnu\\.Emacs$", "^io\\.alacritty$", "^com\\.google\\.android\\.studio$", "^com\\.microsoft\\.VSCode$"]
+            }, {
+            "type": "input_source_if",
+            "input_sources": [
+              { "language": "^ja$" }
+            ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "description": "ctrl + hjkl => arrow keys",
+      "manipulators": [
+        {
+          "type": "basic",
+          "from": { "key_code": "h", "modifiers": { "mandatory": [ "control" ] } },
+          "to": [ { "key_code": "left_arrow" } ]
+        }, {
+        "type": "basic",
+        "from": { "key_code": "j", "modifiers": { "mandatory": [ "control" ] } },
+        "to": [ { "key_code": "down_arrow" } ]
+        }, {
+        "type": "basic",
+        "from": { "key_code": "k", "modifiers": { "mandatory": [ "control" ] } },
+        "to": [ { "key_code": "up_arrow" } ]
+        }, {
+        "type": "basic",
+        "from": { "key_code": "l", "modifiers": { "mandatory": [ "control" ] } },
+        "to": [ { "key_code": "right_arrow" } ]
+        }
+      ]
+    }
+  ]
+}

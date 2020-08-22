@@ -1,0 +1,242 @@
+[[plugins]]
+repo = 'neoclide/coc.nvim'
+merged = 0
+rev = 'release'
+hook_add = '''
+  nmap <silent> gd <Plug>(coc-definition)
+  nmap <silent> gy <Plug>(coc-type-definition)
+  nmap <silent> gi <Plug>(coc-implementation)
+  nmap <silent> gr <Plug>(coc-references)
+  nmap <silent> ge :CocCommand explorer<CR>
+
+  nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
+  nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
+  " Use <c-space> to trigger completion.
+  inoremap <silent><expr> <c-space> coc#refresh()
+
+  " Add `:Fold` command to fold current buffer.
+  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+  " Remap for rename current word
+  nmap <C-c><C-r> <Plug>(coc-rename)
+  " Highlight symbol under cursor on CursorHold
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  " Use K for show documentation in preview window
+  nnoremap <silent> K :call <SID>show_documentation()<CR>
+  function! s:show_documentation()
+    if &filetype == 'vim'
+      execute 'h '.expand('<cword>')
+    else
+      call CocAction('doHover')
+    endif
+  endfunction
+  let g:coc_filetype_map  = {
+  \ 'htmldjango': 'html',
+  \ }
+  " Add `:Format` command to format current buffer.
+  command! -nargs=0 Format :call CocAction('format')
+'''
+
+[[plugins]]
+repo = 'liuchengxu/vista.vim'
+depends = ['coc.nvim']
+hook_add = '''
+  let g:vista_default_executive = 'coc'
+  let g:vista_echo_cursor_strategy='floating_win'
+  let g:vista#renderer#enable_icon = 1
+  let g:vista_highlight_whole_line = 1
+  let g:vista#renderer#icons = {
+\   "function": "\uf794",
+\   "variable": "\uf71b",
+\  }
+  nmap <silent> <C-f><C-v> :<C-u>Vista<CR>
+  nmap <silent> <C-f><C-s> :<C-u>Vista finder<CR>
+'''
+
+hook_post_source = '''
+  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+'''
+
+[[plugins]]
+repo = 'Shougo/deol.nvim'
+
+[[plugins]]
+repo = '/usr/local/opt/fzf'
+
+[[plugins]]
+repo = 'junegunn/fzf.vim'
+depends = 'fzf'
+hook_add = '''
+
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+let s:options = {'options': ['--layout=reverse', '--info=inline']}
+
+nmap <silent> <C-g> :<C-u>Rg<CR>
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \  "rg --hidden --column --line-number --no-heading --color=always --smart-case --glob '!.git/*' -- ".shellescape(<q-args>), 1,
+  \  fzf#vim#with_preview(), <bang>0)
+command! -bang -nargs=? -complete=dir FilesWithPreview
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
+noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
+command! FZFMru call fzf#run(extend(extend({
+    \ 'sink':    'e',
+	\ 'source':  v:oldfiles,
+    \ 'options': '-m -x +s',
+    \ 'down': '40%',
+    \ }, g:fzf_layout), s:options))
+'''
+
+[[plugins]]# comment
+repo = 'tpope/vim-commentary'
+
+# [[plugins]]# git
+# repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+repo = 'lambdalisue/gina.vim'
+hook_post_source = '''
+    noremap <silent><C-s><C-s> :<C-u>Gina status<CR>
+    call gina#custom#command#alias('branch', 'br')
+    call gina#custom#command#option('br', '-v', 'v')
+    call gina#custom#command#option(
+      \ '/\%(log\|reflog\)',
+      \ '--opener', 'vsplit'
+      \)
+    call gina#custom#command#option(
+      \ 'log', '--group', 'log-viewer'
+      \)
+    call gina#custom#command#option(
+      \ 'reflog', '--group', 'reflog-viewer'
+      \)
+    call gina#custom#command#option(
+      \ 'diff', '--group', 'diff'
+      \)
+    call gina#custom#command#option(
+      \ 'commit', '-v|--verbose'
+      \)
+    call gina#custom#mapping#nmap(
+      \ 'status', '<C-c><C-c>',
+      \ ':<C-u>Gina commit<CR>',
+      \ {'noremap': 1, 'silent': 1}
+      \)
+    call gina#custom#mapping#nmap(
+      \ 'commit', '<C-s><C-s>',
+      \ ':<C-u>Gina status<CR>',
+      \ {'noremap': 1, 'silent': 1}
+      \)
+    call gina#custom#execute(
+      \ '/\%(status\|branch\|ls\|grep\|changes\|tag\)',
+      \ 'setlocal winfixheight',
+      \)
+	call gina#custom#mapping#nmap(
+      \ 'status', 'dj',
+      \ 'j:<C-u>call gina#action#call("diff:preview:top")<CR>',
+      \ {'noremap': 1, 'silent': 1}
+      \)
+    call gina#custom#mapping#nmap(
+      \ 'status', 'dk',
+      \ 'k:<C-u>call gina#action#call("diff:preview:top")<CR>',
+      \ {'noremap': 1, 'silent': 1}
+      \)
+'''
+
+[[plugins]]# toml
+repo = 'cespare/vim-toml'
+
+[[plugins]]# かっこの補完
+repo = 'cohama/lexima.vim'
+
+[[plugins]]# かっこの補完
+repo = 'machakann/vim-sandwich'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+hook_add = '''
+  autocmd user indentline doautocmd indentline syntax
+'''
+
+[[plugins]]
+repo =  'editorconfig/editorconfig-vim'
+hook_add = '''
+  let g:EditorConfig_verbose=1
+'''
+
+[[plugins]]
+repo = 'vim-scripts/camelcasemotion'
+hook_add = '''
+  map w <Plug>CamelCaseMotion_w
+  map b <Plug>CamelCaseMotion_b
+  map e <Plug>CamelCaseMotion_e
+  sunmap w
+  sunmap b
+  sunmap e
+'''
+
+[[plugins]]
+repo = 'wakatime/vim-wakatime'
+
+[[plugins]]
+repo = 'simeji/winresizer'
+
+[[plugins]]
+repo='mbbill/undotree'
+
+[[plugins]]
+repo = 'tpope/vim-surround'
+
+[[plugins]]
+repo='janko/vim-test'
+hook_add = '''
+  nmap <silent> <C-t> :TestNearest<CR>
+'''
+
+[[plugins]]
+repo = 'simnalamburt/vim-mundo'
+hook_add = '''
+  nmap <Leader>h :MundoToggle<CR>
+'''
+
+[[plugins]]
+repo = 'twitvim/twitvim'
+
+[[plugins]]
+repo = 'lambdalisue/edita.vim'
+
+[[plugins]]
+repo = 'lambdalisue/readablefold.vim'
+
+[[plugins]]
+repo = 'nvim-treesitter/nvim-treesitter'
+merged = 0
+hook_source = '''
+lua <<EOF
+  require('init')
+EOF
+'''
+
+[[plugins]]
+repo = 'thinca/vim-quickrun'
+
+[[plugins]]
+repo = 'easymotion/vim-easymotion'
+hook_add = '''
+   nmap <Leader>f <Plug>(easymotion-overwin-w)
+'''
+
+[[plugins]]
+repo = 'gelguy/wilder.nvim'
+hook_add = '''
+  call wilder#enable_cmdline_enter()
+
+  set wildcharm=<Tab>
+  cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
+  cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
+
+  " only / and ? is enabled by default
+  call wilder#set_option('modes', ['/', '?', ':'])
+'''

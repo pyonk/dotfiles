@@ -1,0 +1,52 @@
+{
+  "vetur.trace.server": "verbose",
+  "explorer.width": 30,
+  "emmet.includeLanguages": {"eruby": "html", "vue": "html"},
+  "codeLens.enable": true,
+  "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "explorer.icon.enableNerdfont": true,
+  "git.addedSign.text": "ǁ",
+  "git.removedSign.text": "ǁ",
+  "git.changedSign.text": "ǁ",
+  "suggest.timeout": 5000,
+  "diagnostic.errorSign": "💩",
+  "diagnostic.warningSign": "🤔",
+  "diagnostic.infoSign": "i>>",
+  "diagnostic.hintSign": "h>>",
+  "diagnostic.virtualText": false,
+  "diagnostic.messageTarget": "float",
+  "diagnostic.virtualTextPrefix": "▶︎ ",
+  "suggest.enablePreview": true,
+  "coc.preferences.colorSupport": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.linting.flake8Enabled": true,
+  "python.linting.pylintEnabled": false,
+  "python.jediEnabled": false,
+  "python.venvFolders": [
+  "  envs",
+  "  .pyenv",
+  "  .venv",
+    ".direnv"
+  ],
+  "solargraph.diagnostics": true,
+  "solargraph.formatting": true,
+  "languageserver": {
+    "golang": {
+      "command": "gopls",
+      "rootPatterns": ["go.mod"],
+      "filetypes": ["go"]
+    },
+    "dart": {
+      "command": "dart_language_server",
+      "args": [],
+      "filetypes": ["dart"],
+      "initializationOptions": {},
+      "settings": {
+        "dart": {
+          "validation": {},
+          "completion": {}
+        }
+      }
+    }
+  }
+}

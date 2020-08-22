@@ -1,0 +1,11 @@
+[[plugins]]
+on_ft = 'vue'
+repo = 'posva/vim-vue'
+
+[[plugins]]
+on_ft = 'javascript'
+repo = 'othree/yajs.vim'
+
+[[plugins]]
+on_ft = 'javascript'
+repo = 'othree/es.next.syntax.vim'

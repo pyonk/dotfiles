@@ -1,0 +1,24 @@
+### all ignore ###
+/*
+/.**
+
+!.gitignore
+!.config/
+
+!.config/alacritty/
+!.config/alacritty/**
+
+!.config/karabiner/
+!.config/karabiner/**
+.config/karabiner/automatic_backups
+
+!.config/nvim/
+!.config/nvim/**
+.config/nvim/sessions/
+
+!.config/tmux/
+!.config/tmux/**
+
+!.config/flake8
+
+.DS_Store

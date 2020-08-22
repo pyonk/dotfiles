@@ -1,0 +1,85 @@
+[[plugins]]
+repo = 'arzg/vim-colors-xcode'
+# hook_add = '''
+#   colorscheme xcodedark
+# '''
+
+[[plugins]]
+repo = 'wimstefan/vim-artesanal'
+# hook_add = '''
+#   colorscheme artesanal
+# '''
+
+[[plugins]]
+repo = 'cormacrelf/vim-colors-github'
+# hook_add = '''
+#   let g:github_colors_soft = 1
+#   colorscheme github
+# '''
+
+[[plugins]]
+repo = 'yasukotelin/shirotelin'
+# hook_add = '''
+#   colorscheme shirotelin
+# '''
+
+[[plugins]]
+repo = 'AlanWarren/rocket'
+# hook_add = '''
+#   colorscheme rocket
+# '''
+hook_post_source='''
+  highlight Comment gui=none
+'''
+
+[[plugins]]
+repo = 'arcticicestudio/nord-vim'
+# hook_add = '''
+#   colorscheme nord
+# '''
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+# hook_add = '''
+#   set background=light
+#   colorscheme gruvbox
+# '''
+
+[[plugins]]
+repo = 'cocopon/iceberg.vim'
+hook_add = '''
+  " set background=light
+  colorscheme iceberg
+'''
+
+[[plugins]]
+repo = 'dracula/vim'
+# hook_add = '''
+#   colorscheme dracula
+# '''
+
+[[plugins]]
+repo = 'lifepillar/vim-solarized8'
+# hook_add = '''
+#   set background=light
+#   colorscheme solarized8
+# '''
+
+[[plugins]]
+repo = 'liuchengxu/space-vim-dark'
+# hook_add = '''
+#   colorscheme space-vim-dark
+# '''
+
+[[plugins]]
+repo = 'kjssad/quantum.vim'
+# hook_add = '''
+#   colorscheme quantum
+#   set background=dark
+# '''
+hook_post_source = '''
+  let g:quantum_black=1
+  let g:quantum_italics=1
+  highlight link Identifier Keyword
+  highlight Comment gui=none
+'''
