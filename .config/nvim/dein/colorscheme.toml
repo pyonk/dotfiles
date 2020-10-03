@@ -48,7 +48,7 @@ repo = 'morhetz/gruvbox'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
-  " set background=light
+  set background=light
   colorscheme iceberg
 '''
 

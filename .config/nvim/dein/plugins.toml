@@ -7,8 +7,9 @@ hook_add = '''
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
-  nmap <silent> ge :CocCommand explorer<CR>
+  " nmap <silent> ge :<C-u>CocCommand explorer<CR>
 
+  nmap <silent> <C-c><C-d> :<C-u>CocDiagnostics<CR>
   nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
   nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
   " Use <c-space> to trigger completion.
@@ -35,6 +36,9 @@ hook_add = '''
   \ }
   " Add `:Format` command to format current buffer.
   command! -nargs=0 Format :call CocAction('format')
+
+  " for coc-snippets
+  let g:coc_snippet_next = '<TAB>'
 '''
 
 [[plugins]]
@@ -91,8 +95,25 @@ command! FZFMru call fzf#run(extend(extend({
 [[plugins]]# comment
 repo = 'tpope/vim-commentary'
 
-# [[plugins]]# git
-# repo = 'tpope/vim-fugitive'
+[[plugins]]
+repo = 'lambdalisue/fern.vim'
+hook_post_source = '''
+  nmap <silent> ge :<C-u>Fern . -reveal=%<CR>
+  nmap <silent> <Leader>ge :<C-u>Fern . -drawer -reveal=% -toggle<CR>
+'''
+[[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+[[plugins]]
+repo = 'lambdalisue/fern-git-status.vim'
+depends = ['fern.vim']
+
+[[plugins]]
+repo = 'lambdalisue/fern-renderer-nerdfont.vim'
+depends = ['fern.vim', 'nerdfont.vim']
+hook_add = '''
+  let g:fern#renderer = "nerdfont"
+'''
 
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
@@ -148,7 +169,7 @@ repo = 'cespare/vim-toml'
 [[plugins]]# かっこの補完
 repo = 'cohama/lexima.vim'
 
-[[plugins]]# かっこの補完
+[[plugins]]
 repo = 'machakann/vim-sandwich'
 
 [[plugins]]
@@ -196,15 +217,6 @@ hook_add = '''
 '''
 
 [[plugins]]
-repo = 'simnalamburt/vim-mundo'
-hook_add = '''
-  nmap <Leader>h :MundoToggle<CR>
-'''
-
-[[plugins]]
-repo = 'twitvim/twitvim'
-
-[[plugins]]
 repo = 'lambdalisue/edita.vim'
 
 [[plugins]]
@@ -220,11 +232,15 @@ EOF
 '''
 
 [[plugins]]
+repo = 'vigoux/treesitter-context.nvim'
+depends = ['nvim-treesitter']
+
+[[plugins]]
 repo = 'thinca/vim-quickrun'
 
 [[plugins]]
 repo = 'easymotion/vim-easymotion'
-hook_add = '''
+hook_post_source = '''
    nmap <Leader>f <Plug>(easymotion-overwin-w)
 '''
 
@@ -240,3 +256,12 @@ hook_add = '''
   " only / and ? is enabled by default
   call wilder#set_option('modes', ['/', '?', ':'])
 '''
+
+[[plugins]]
+repo = 'nvim-lua/popup.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+
+[[plugins]]
+repo = 'nvim-lua/telescope.nvim'
