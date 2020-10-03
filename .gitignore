@@ -24,5 +24,6 @@
 !.config/flake8
 
 !.zshrc
+!install.sh
 
 .DS_Store
