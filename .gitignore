@@ -15,10 +15,14 @@
 !.config/nvim/
 !.config/nvim/**
 .config/nvim/sessions/
+.config/nvim/.netrwhist
 
 !.config/tmux/
 !.config/tmux/**
+.config/tmux/plugins/
 
 !.config/flake8
+
+!.zshrc
 
 .DS_Store
