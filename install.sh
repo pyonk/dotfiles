@@ -4,6 +4,28 @@ function has() {
     type "$1" &>/dev/null
 }
 
+function git_clone() {
+    if has "git"; then
+        git clone --recursive "$1" "$2"
+
+    elif has "curl" || has "wget"; then
+        tarball="$GITHUB_URL/archive/master.tar.gz"
+
+        mkdir -p "$2"
+        if has "curl"; then
+            curl -L "$tarball"
+
+        elif has "wget"; then
+            wget -O - "$tarball"
+
+        fi | tar zxvf -C "$2" --strip-components=1
+
+    else
+        echo "git or curl or wget required"
+        exit 1;
+    fi
+}
+
 #################
 # tmux-256color #
 #################
@@ -18,14 +40,13 @@ elif has "wget"; then
 fi
 
 tic "$TMUX_TERMINFO_TXT"
-echo "complided tmux-256color"
+echo ">> complided tmux-256color"
 
 ########
 # pure #
 ########
-mkdir -p "$HOME/.zsh"
-git clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
-echo "installed pure prompt"
+git_clone https://github.com/sindresorhus/pure.git "$HOME/.zsh/pure"
+echo ">> installed pure prompt"
 
 ############
 # dotfiles #
@@ -34,26 +55,7 @@ echo "installed pure prompt"
 DOTPATH=$HOME/dotfiles
 GITHUB_URL="https://github.com/pyonk/dotfiles"
 
-if has "git"; then
-    git clone --recursive "$GITHUB_URL" "$DOTPATH"
-
-elif has "curl" || has "wget"; then
-    tarball="$GITHUB_URL/archive/master.tar.gz"
-
-    if has "curl"; then
-        curl -L "$tarball"
-
-    elif has "wget"; then
-        wget -O - "$tarball"
-
-    fi | tar zxv
-
-    mv -f dotfiles-master "$DOTPATH"
-
-else
-    echo "curl or wget required"
-    exit 1;
-fi
+git_clone "$GITHUB_URL" "$DOTPATH"
 
 cd $DOTPATH
 if [ $? -ne 0 ]; then
@@ -69,4 +71,11 @@ do
     ln -snfv "$DOTPATH/$f" "$HOME/$f"
 done
 
-echo "installed!"
+echo ">> installed dotfiles"
+
+
+#######
+# tpm #
+#######
+git_clone "https://github.com/tmux-plugins/tpm" $HOME/.config/tmux/plugins/tpm
+echo ">> installed tpm"
