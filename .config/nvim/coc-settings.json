@@ -1,17 +1,15 @@
 {
   "vetur.trace.server": "verbose",
-  "explorer.width": 30,
   "emmet.includeLanguages": {"eruby": "html", "vue": "html"},
   "codeLens.enable": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
-  "explorer.icon.enableNerdfont": true,
   "git.addedSign.text": "ǁ",
   "git.removedSign.text": "ǁ",
   "git.changedSign.text": "ǁ",
   "suggest.timeout": 5000,
   "diagnostic.errorSign": "💩",
   "diagnostic.warningSign": "🤔",
-  "diagnostic.infoSign": "i>>",
+  "diagnostic.infoSign": "💁",
   "diagnostic.hintSign": "h>>",
   "diagnostic.virtualText": false,
   "diagnostic.messageTarget": "float",
@@ -31,11 +29,6 @@
   "solargraph.diagnostics": true,
   "solargraph.formatting": true,
   "languageserver": {
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
-    },
     "dart": {
       "command": "dart_language_server",
       "args": [],
