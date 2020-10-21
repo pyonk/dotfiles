@@ -76,17 +76,19 @@ let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let s:options = {'options': ['--layout=reverse', '--info=inline']}
 
 nmap <silent> <C-g> :<C-u>Rg<CR>
+
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
   \  "rg --hidden --column --line-number --no-heading --color=always --smart-case --glob '!.git/*' -- ".shellescape(<q-args>), 1,
-  \  fzf#vim#with_preview(), <bang>0)
+  \  extend(fzf#vim#with_preview(), {'options': '--delimiter : --nth 4..'}), <bang>0)
 command! -bang -nargs=? -complete=dir FilesWithPreview
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
 nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
 noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
 command! FZFMru call fzf#run(extend(extend({
     \ 'sink':    'e',
-	\ 'source':  v:oldfiles,
+    \ 'source':  v:oldfiles,
     \ 'options': '-m -x +s',
     \ 'down': '40%',
     \ }, g:fzf_layout), s:options))
@@ -214,6 +216,15 @@ repo = 'tpope/vim-surround'
 repo='janko/vim-test'
 hook_add = '''
   nmap <silent> <C-t> :TestNearest<CR>
+  let g:test#strategy = "asyncrun"
+'''
+depends = ['asyncrun.vim']
+
+[[plugins]]
+repo='skywind3000/asyncrun.vim'
+hook_add = '''
+  let g:asyncrun_open = 8
+  autocmd User AsyncRunStop copen | $ | wincmd p
 '''
 
 [[plugins]]
@@ -245,19 +256,6 @@ hook_post_source = '''
 '''
 
 [[plugins]]
-repo = 'gelguy/wilder.nvim'
-hook_add = '''
-  call wilder#enable_cmdline_enter()
-
-  set wildcharm=<Tab>
-  cmap <expr> <Tab> wilder#in_context() ? wilder#next() : "\<Tab>"
-  cmap <expr> <S-Tab> wilder#in_context() ? wilder#previous() : "\<S-Tab>"
-
-  " only / and ? is enabled by default
-  call wilder#set_option('modes', ['/', '?', ':'])
-'''
-
-[[plugins]]
 repo = 'nvim-lua/popup.nvim'
 
 [[plugins]]
@@ -265,3 +263,12 @@ repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
 repo = 'nvim-lua/telescope.nvim'
+# hook_add = '''
+
+# nmap <silent> <C-f><C-f> <cmd>lua require'telescope.builtin'.find_files{}<CR>
+# nmap <silent> <C-g> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
+# noremap <silent><C-f><C-r> <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
+# '''
+
+# [[plugins]]
+# repo = 'kkoomen/vim-doge'
