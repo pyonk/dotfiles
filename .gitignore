@@ -22,6 +22,9 @@
 !.config/tmux/**
 .config/tmux/plugins/
 
+!.config/kitty/
+!.config/kitty/**
+
 !.config/flake8
 
 !.zshrc

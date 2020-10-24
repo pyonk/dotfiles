@@ -68,8 +68,8 @@ endif
 "*****************************************************************************"
 set termguicolors
 set expandtab
-set shiftwidth=4
-set tabstop=4
+set shiftwidth=2
+set tabstop=2
 set smarttab
 set smartindent
 set listchars=tab:»-,trail:-,eol:¬,extends:»,precedes:«,nbsp:%
@@ -152,6 +152,12 @@ let g:javascript_enable_domhtmlcss = 1
 augroup vimrc-javascript
   autocmd!
   autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
+augroup END
+
+" json
+augroup vimrc-json
+  autocmd!
+  autocmd FileType json set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
 

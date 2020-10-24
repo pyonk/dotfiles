@@ -41,6 +41,9 @@ alias ls="ls -G"
 alias vim="nvim"
 
 export EDITOR=nvim
+# Completion for kitty
+kitty + complete setup zsh | source /dev/stdin
+
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zsh_profile ] && source ~/.zsh_profile
