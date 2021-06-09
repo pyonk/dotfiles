@@ -9,9 +9,16 @@ hook_add = '''
   nmap <silent> gr <Plug>(coc-references)
   " nmap <silent> ge :<C-u>CocCommand explorer<CR>
 
-  nmap <silent> <C-c><C-d> :<C-u>CocDiagnostics<CR>
   nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
   nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
+
+  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
+  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
 
@@ -41,6 +48,17 @@ hook_add = '''
   let g:coc_snippet_next = '<TAB>'
 '''
 
+hook_post_source = '''
+  " for coc-actions
+  " Remap for do codeAction of selected region
+  function! s:cocActionsOpenFromSelected(type) abort
+    execute 'CocCommand actions.open ' . a:type
+  endfunction
+  xmap <silent> <leader>a :<C-u>execute 'CocCommand actions.open ' . visualmode()<CR>
+  nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
+'''
+
+
 [[plugins]]
 repo = 'liuchengxu/vista.vim'
 depends = ['coc.nvim']
@@ -54,7 +72,7 @@ hook_add = '''
 \   "variable": "\uf71b",
 \  }
   nmap <silent> <C-f><C-v> :<C-u>Vista<CR>
-  nmap <silent> <C-f><C-s> :<C-u>Vista finder<CR>
+  " nmap <silent> <C-f><C-s> :<C-u>Vista finder<CR>
 '''
 
 hook_post_source = '''
@@ -75,7 +93,7 @@ hook_add = '''
 let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
 let s:options = {'options': ['--layout=reverse', '--info=inline']}
 
-nmap <silent> <C-g> :<C-u>Rg<CR>
+" nmap <silent> <C-g> :<C-u>Rg<CR>
 
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -84,8 +102,8 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir FilesWithPreview
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 
-nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
-noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
+" nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
+" noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
 command! FZFMru call fzf#run(extend(extend({
     \ 'sink':    'e',
     \ 'source':  v:oldfiles,
@@ -153,7 +171,7 @@ hook_post_source = '''
       \ '/\%(status\|branch\|ls\|grep\|changes\|tag\)',
       \ 'setlocal winfixheight',
       \)
-	call gina#custom#mapping#nmap(
+    call gina#custom#mapping#nmap(
       \ 'status', 'dj',
       \ 'j:<C-u>call gina#action#call("diff:preview:top")<CR>',
       \ {'noremap': 1, 'silent': 1}
@@ -223,8 +241,8 @@ depends = ['asyncrun.vim']
 [[plugins]]
 repo='skywind3000/asyncrun.vim'
 hook_add = '''
-  let g:asyncrun_open = 8
-  autocmd User AsyncRunStop copen | $ | wincmd p
+  let g:asyncrun_open = 14
+  " autocmd User AsyncRunStop copen | $ | wincmd p
 '''
 
 [[plugins]]
@@ -236,11 +254,66 @@ repo = 'lambdalisue/readablefold.vim'
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 merged = 0
-hook_source = '''
+hook_post_source = '''
 lua <<EOF
   require('init')
 EOF
 '''
+
+# highlight default link TSPunctDelimiter Delimiter
+# highlight default link TSPunctBracket Delimiter
+# highlight default link TSPunctSpecial Delimiter
+
+# highlight default link TSConstant Constant
+# highlight default link TSConstBuiltin Special
+# highlight default link TSConstMacro Define
+# highlight default link TSString String
+# highlight default link TSStringRegex String
+# highlight default link TSStringEscape SpecialChar
+# highlight default link TSCharacter Character
+# highlight default link TSNumber Number
+# highlight default link TSBoolean Boolean
+# highlight default link TSFloat Float
+
+# highlight default link TSFunction Function
+# highlight default link TSFuncBuiltin Special
+# highlight default link TSFuncMacro Macro
+# highlight default link TSParameter Identifier
+# highlight default link TSParameterReference TSParameter
+# highlight default link TSMethod Function
+# highlight default link TSField Identifier
+# highlight default link TSProperty Identifier
+# highlight default link TSConstructor Special
+# highlight default link TSAnnotation PreProc
+# highlight default link TSAttribute PreProc
+# highlight default link TSNamespace Include
+
+# highlight default link TSConditional Conditional
+# highlight default link TSRepeat Repeat
+# highlight default link TSLabel Label
+# highlight default link TSOperator Operator
+# highlight default link TSKeyword Keyword
+# highlight default link TSKeywordFunction Keyword
+# highlight default link TSKeywordOperator TSOperator
+# highlight default link TSException Exception
+
+# highlight default link TSType Type
+# highlight default link TSTypeBuiltin Type
+# highlight default link TSInclude Include
+
+# highlight default link TSVariableBuiltin Special
+
+# highlight default link TSText TSNone
+# highlight default TSStrong term=bold cterm=bold gui=bold
+# highlight default TSEmphasis term=italic cterm=italic gui=italic
+# highlight default TSUnderline term=underline cterm=underline gui=underline
+# highlight default link TSTitle Title
+# highlight default link TSLiteral String
+# highlight default link TSURI Underlined
+
+# highlight default link TSTag Label
+# highlight default link tstagdelimiter delimiter
+# '''
 
 [[plugins]]
 repo = 'vigoux/treesitter-context.nvim'
@@ -248,11 +321,15 @@ depends = ['nvim-treesitter']
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
+hook_add = '''
+let g:quickrun_config = {}
+autocmd BufNewFile,BufRead *.rs  let g:quickrun_config.rust = {"exec" : "cargo run"}
+'''
 
 [[plugins]]
-repo = 'easymotion/vim-easymotion'
+repo = 'phaazon/hop.nvim'
 hook_post_source = '''
-   nmap <Leader>f <Plug>(easymotion-overwin-w)
+   nmap <C-f><C-f> <cmd>HopWord<CR>
 '''
 
 [[plugins]]
@@ -263,12 +340,74 @@ repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
 repo = 'nvim-lua/telescope.nvim'
-# hook_add = '''
+depends = ['popup.nvim', 'plenary.nvim']
+hook_add = '''
+	nmap <silent> <C-f><C-l> <cmd>Telescope find_files theme=get_ivy<CR>
+	nmap <silent> <C-g> <cmd>Telescope live_grep theme=get_ivy<CR>
+	nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
+	nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
+'''
+hook_post_source = '''
+lua << EOF
+local actions = require('telescope.actions')
 
-# nmap <silent> <C-f><C-f> <cmd>lua require'telescope.builtin'.find_files{}<CR>
-# nmap <silent> <C-g> <cmd>lua require'telescope.builtin'.live_grep{}<CR>
-# noremap <silent><C-f><C-r> <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
-# '''
+require('telescope').setup{
+	defaults = {
+		winblend = 35,
+		mappings = {
+			i = {
+				["<c-x>"] = false,
+				["<c-s>"] = actions.select_vertical,
+				["<Tab>"] = actions.toggle_selection,
+				['<C-q>'] = actions.send_selected_to_qflist,
+			}
+		}
+	}
+}
+EOF
+'''
+
+[[plugins]]
+repo = 'nvim-telescope/telescope-fzf-writer.nvim'
+depends = ['telescope.nvim']
+hook_post_source = '''
+lua << EOF
+require('telescope').setup {
+    extensions = {
+        fzf_writer = {
+            minimum_grep_characters = 3,
+            minimum_files_characters = 3,
+
+            -- Disabled by default.
+            -- Will probably slow down some aspects of the sorter, but can make color highlights.
+            -- I will work on this more later.
+            use_highlighter = true,
+        }
+    }
+}
+EOF
+'''
 
 # [[plugins]]
 # repo = 'kkoomen/vim-doge'
+[[plugins]]
+repo = 'pyonk/campfire.vim'
+
+[[plugins]]
+repo = 'delphinus/telescope-memo.nvim'
+depends = ['telescope.nvim']
+hook_add = '''
+  nmap <silent> <C-m><C-l> <cmd>:Telescope memo list<CR>
+'''
+
+[[plugins]]
+repo = 'folke/trouble.nvim'
+hook_add = '''
+  nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
+'''
+
+[[plugins]]
+repo = 'folke/todo-comments.nvim'
+
+[[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'

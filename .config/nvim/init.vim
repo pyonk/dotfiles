@@ -3,9 +3,9 @@ let g:python3_host_prog = '/usr/local/bin/python3'
 let g:poetry = 0
 if exists("$VIRTUAL_ENV")
   if !empty(glob("$VIRTUAL_ENV/bin/python3"))
-    g:python3_host_prog = substitute(system("which python"), '\n', '', 'g')
+    let g:python3_host_prog = "$VIRTUAL_ENV/bin/python3"
   else
-    g:python_host_prog = substitute(system("which python"), '\n', '', 'g')
+    let g:python_host_prog = substitute(system("which python"), '\n', '', 'g')
   endif
 else
   if !empty(glob(substitute(system('poetry env info --path'), '\n\+$', '', '')."/bin/python3"))
@@ -36,6 +36,7 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml(s:toml_dir . '/html.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/python.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/go.toml', {'lazy': 1})
+  call dein#load_toml(s:toml_dir . '/ruby.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/javascript.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/typescript.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/dart.toml', {'lazy': 1})
@@ -151,7 +152,13 @@ let g:javascript_enable_domhtmlcss = 1
 " vim-javascript
 augroup vimrc-javascript
   autocmd!
-  autocmd FileType javascript set tabstop=4|set shiftwidth=4|set expandtab softtabstop=4
+  autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+augroup END
+
+augroup vimrc-vue
+  autocmd!
+  autocmd FileType vue setlocal expandtab shiftwidth=2 tabstop=2
+      \ formatoptions+=cq softtabstop=2
 augroup END
 
 " json
@@ -209,6 +216,7 @@ source ~/.config/nvim/statusline.vim
 autocmd VimEnter * call dein#call_hook('post_source')
 
 set colorcolumn=88
+set cursorline
 
 set updatetime=400
 

@@ -1,4 +1,4 @@
-require'nvim-treesitter.configs'.setup {
+require('nvim-treesitter.configs').setup {
     highlight = {
         enable = true,                    -- false will disable the whole extension
         disable = {  },                   -- list of language that will be disabled
@@ -13,19 +13,45 @@ require'nvim-treesitter.configs'.setup {
           node_decremental = "grm",       -- decrement to the previous node
         }
     },
-    refactor = {
-      highlight_defintions = {
-        enable = true
-      },
-      smart_rename = {
-        enable = true,
-        smart_rename = "grr"              -- mapping to rename reference under cursor
-      },
-      navigation = {
-        enable = true,
-        goto_definition = "gnd",          -- mapping to go to definition of symbol under cursor
-        list_definitions = "gnD"          -- mapping to list all definitions in current file
-      }
+    -- ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
+}
+
+require('telescope').setup{
+  defaults = {
+    vimgrep_arguments = {
+      'rg',
+      -- '--color=never',
+      '--no-heading',
+      '--with-filename',
+      '--line-number',
+      '--column',
+      '--smart-case'
     },
-    ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
+    prompt_position = "bottom",
+    prompt_prefix = ">",
+    selection_strategy = "reset",
+    sorting_strategy = "descending",
+    layout_strategy = "horizontal",
+    layout_defaults = {
+      -- TODO add builtin options.
+    },
+    file_sorter =  require'telescope.sorters'.get_fuzzy_file ,
+    file_ignore_patterns = {},
+    generic_sorter =  require'telescope.sorters'.get_generic_fuzzy_sorter,
+    shorten_path = true,
+    winblend = 0,
+    width = 0.75,
+    preview_cutoff = 120,
+    results_height = 1,
+    results_width = 0.8,
+    border = {},
+    borderchars = { '─', '│', '─', '│', '╭', '╮', '╯', '╰'},
+    color_devicons = true,
+    use_less = true,
+    set_env = { ['colorterm'] = 'truecolor' }, -- default { }, currently unsupported for shells like cmd.exe / powershell.exe
+  }
+}
+require("todo-comments").setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
 }

@@ -10,36 +10,15 @@
   "diagnostic.errorSign": "💩",
   "diagnostic.warningSign": "🤔",
   "diagnostic.infoSign": "💁",
-  "diagnostic.hintSign": "h>>",
+  "diagnostic.hintSign": "💡",
   "diagnostic.virtualText": false,
   "diagnostic.messageTarget": "float",
   "diagnostic.virtualTextPrefix": "▶︎ ",
   "suggest.enablePreview": true,
   "coc.preferences.colorSupport": true,
-  "python.analysis.typeCheckingMode": "basic",
+  "python.analysis.typeCheckingMode": "off",
   "python.linting.flake8Enabled": true,
   "python.linting.pylintEnabled": false,
-  "python.jediEnabled": false,
-  "python.venvFolders": [
-  "  envs",
-  "  .pyenv",
-  "  .venv",
-    ".direnv"
-  ],
   "solargraph.diagnostics": true,
-  "solargraph.formatting": true,
-  "languageserver": {
-    "dart": {
-      "command": "dart_language_server",
-      "args": [],
-      "filetypes": ["dart"],
-      "initializationOptions": {},
-      "settings": {
-        "dart": {
-          "validation": {},
-          "completion": {}
-        }
-      }
-    }
-  }
+  "solargraph.formatting": true
 }

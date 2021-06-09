@@ -16,7 +16,6 @@ on_ft = 'python'
 [[plugins]]
 repo = 'psf/black'
 on_ft = 'python'
-rev = 'stable'
 hook_add = '''
   autocmd BufWritePre *.py execute ':Black'
 '''

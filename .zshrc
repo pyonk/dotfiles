@@ -5,7 +5,7 @@ autoload -U promptinit; promptinit
 prompt pure
 
 autoload -Uz colors
-autoload -U compinit
+autoload -Uz compinit
 
 zstyle ':completion:*:default' menu select=2
 
@@ -38,12 +38,9 @@ setopt correct
 setopt share_history
 
 alias ls="ls -G"
-alias vim="nvim"
+# alias vim="nvim"
 
 export EDITOR=nvim
-# Completion for kitty
-kitty + complete setup zsh | source /dev/stdin
-
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zsh_profile ] && source ~/.zsh_profile

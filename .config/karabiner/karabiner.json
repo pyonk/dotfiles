@@ -105,75 +105,6 @@
                         ]
                     },
                     {
-                        "description": "ctrl + hjkl => arrow keys",
-                        "manipulators": [
-                            {
-                                "from": {
-                                    "key_code": "h",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "left_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "j",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "down_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "k",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "up_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            },
-                            {
-                                "from": {
-                                    "key_code": "l",
-                                    "modifiers": {
-                                        "mandatory": [
-                                            "control"
-                                        ]
-                                    }
-                                },
-                                "to": [
-                                    {
-                                        "key_code": "right_arrow"
-                                    }
-                                ],
-                                "type": "basic"
-                            }
-                        ]
-                    },
-                    {
                         "description": "CTRL-[を押したときに日本語入力を英数に切り替える。",
                         "manipulators": [
                             {
@@ -271,6 +202,33 @@
                                 "type": "basic"
                             }
                         ]
+                    },
+                    {
+                        "description": "Change caps_lock to control if pressed with other keys. (rev 2)",
+                        "manipulators": [
+                            {
+                                "from": {
+                                    "key_code": "caps_lock",
+                                    "modifiers": {
+                                        "optional": [
+                                            "any"
+                                        ]
+                                    }
+                                },
+                                "to": [
+                                    {
+                                        "key_code": "left_control"
+                                    }
+                                ],
+                                "to_if_alone": [
+                                    {
+                                        "hold_down_milliseconds": 500,
+                                        "key_code": "caps_lock"
+                                    }
+                                ],
+                                "type": "basic"
+                            }
+                        ]
                     }
                 ]
             },
@@ -315,7 +273,7 @@
                     "simple_modifications": []
                 },
                 {
-                    "disable_built_in_keyboard_if_exists": false,
+                    "disable_built_in_keyboard_if_exists": true,
                     "fn_function_keys": [],
                     "identifiers": {
                         "is_keyboard": true,
@@ -325,6 +283,19 @@
                     },
                     "ignore": false,
                     "manipulate_caps_lock_led": false,
+                    "simple_modifications": []
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "fn_function_keys": [],
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": true,
+                        "product_id": 272,
+                        "vendor_id": 1452
+                    },
+                    "ignore": false,
+                    "manipulate_caps_lock_led": true,
                     "simple_modifications": []
                 }
             ],

@@ -1,0 +1,3 @@
+[[plugins]]
+repo = 'tpope/vim-rails'
+on_ft = 'ruby'

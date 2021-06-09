@@ -16,4 +16,5 @@ on_ft=['markdown']
 repo = 'previm/previm'
 hook_add = '''
   let g:previm_open_cmd = 'open -a "Google Chrome"'
+	let g:previm_plantuml_imageprefix = 'http://localhost:8080/png/'
 '''

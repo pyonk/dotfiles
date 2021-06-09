@@ -5,12 +5,6 @@ repo = 'arzg/vim-colors-xcode'
 # '''
 
 [[plugins]]
-repo = 'wimstefan/vim-artesanal'
-# hook_add = '''
-#   colorscheme artesanal
-# '''
-
-[[plugins]]
 repo = 'cormacrelf/vim-colors-github'
 # hook_add = '''
 #   let g:github_colors_soft = 1
@@ -23,20 +17,6 @@ repo = 'yasukotelin/shirotelin'
 #   colorscheme shirotelin
 # '''
 
-[[plugins]]
-repo = 'AlanWarren/rocket'
-# hook_add = '''
-#   colorscheme rocket
-# '''
-hook_post_source='''
-  highlight Comment gui=none
-'''
-
-[[plugins]]
-repo = 'arcticicestudio/nord-vim'
-# hook_add = '''
-#   colorscheme nord
-# '''
 
 [[plugins]]
 repo = 'morhetz/gruvbox'
@@ -48,8 +28,16 @@ repo = 'morhetz/gruvbox'
 [[plugins]]
 repo = 'cocopon/iceberg.vim'
 hook_add = '''
-  set background=light
+  " set background=light
   colorscheme iceberg
+'''
+
+[[plugins]]
+repo = 'folke/tokyonight.nvim'
+hook_add = '''
+  let g:tokyonight_style = 'day' " available: night, storm, day
+  let g:tokyonight_sidebars = [ "qf", "vista_kind", "terminal", "packer" ]
+  colorscheme tokyonight
 '''
 
 [[plugins]]
@@ -66,20 +54,41 @@ repo = 'lifepillar/vim-solarized8'
 # '''
 
 [[plugins]]
-repo = 'liuchengxu/space-vim-dark'
-# hook_add = '''
-#   colorscheme space-vim-dark
-# '''
-
-[[plugins]]
 repo = 'kjssad/quantum.vim'
 # hook_add = '''
 #   colorscheme quantum
 #   set background=dark
 # '''
-hook_post_source = '''
-  let g:quantum_black=1
-  let g:quantum_italics=1
-  highlight link Identifier Keyword
-  highlight Comment gui=none
-'''
+# hook_post_source = '''
+#   let g:quantum_black=1
+#   let g:quantum_italics=1
+#   highlight link Identifier Keyword
+#   highlight Comment gui=none
+# '''
+
+[[plugins]]
+repo = 'sainnhe/edge'
+# hook_add = '''
+#   set background=dark
+#   colorscheme edge
+# '''
+
+[[plugins]]
+repo = 'bluz71/vim-nightfly-guicolors'
+# hook_add = '''
+#   set background=dark
+#   colorscheme nightfly
+# '''
+
+[[plugins]]
+repo = 'kyazdani42/blue-moon'
+# hook_add = '''
+#   set background=dark
+#   colorscheme blue-moon
+# '''
+
+[[plugins]]
+repo = 'jim-at-jibba/ariake-vim-colors'
+
+[[plugins]]
+repo = 'Th3Whit3Wolf/space-nvim'
