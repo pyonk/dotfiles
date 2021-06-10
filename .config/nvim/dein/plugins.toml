@@ -82,37 +82,37 @@ hook_post_source = '''
 [[plugins]]
 repo = 'Shougo/deol.nvim'
 
-[[plugins]]
-repo = '/usr/local/opt/fzf'
+# [[plugins]]
+# repo = '/usr/local/opt/fzf'
+
+# [[plugins]]
+# repo = 'junegunn/fzf.vim'
+# depends = 'fzf'
+# hook_add = '''
+
+# let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
+# let s:options = {'options': ['--layout=reverse', '--info=inline']}
+
+# " nmap <silent> <C-g> :<C-u>Rg<CR>
+
+# command! -bang -nargs=* Rg
+#   \ call fzf#vim#grep(
+#   \  "rg --hidden --column --line-number --no-heading --color=always --smart-case --glob '!.git/*' -- ".shellescape(<q-args>), 1,
+#   \  extend(fzf#vim#with_preview(), {'options': '--delimiter : --nth 4..'}), <bang>0)
+# command! -bang -nargs=? -complete=dir FilesWithPreview
+#   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+
+# " nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
+# " noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
+# command! FZFMru call fzf#run(extend(extend({
+#     \ 'sink':    'e',
+#     \ 'source':  v:oldfiles,
+#     \ 'options': '-m -x +s',
+#     \ 'down': '40%',
+#     \ }, g:fzf_layout), s:options))
+# '''
 
 [[plugins]]
-repo = 'junegunn/fzf.vim'
-depends = 'fzf'
-hook_add = '''
-
-let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-let s:options = {'options': ['--layout=reverse', '--info=inline']}
-
-" nmap <silent> <C-g> :<C-u>Rg<CR>
-
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \  "rg --hidden --column --line-number --no-heading --color=always --smart-case --glob '!.git/*' -- ".shellescape(<q-args>), 1,
-  \  extend(fzf#vim#with_preview(), {'options': '--delimiter : --nth 4..'}), <bang>0)
-command! -bang -nargs=? -complete=dir FilesWithPreview
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-" nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
-" noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
-command! FZFMru call fzf#run(extend(extend({
-    \ 'sink':    'e',
-    \ 'source':  v:oldfiles,
-    \ 'options': '-m -x +s',
-    \ 'down': '40%',
-    \ }, g:fzf_layout), s:options))
-'''
-
-[[plugins]]# comment
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
@@ -183,10 +183,10 @@ hook_post_source = '''
       \)
 '''
 
-[[plugins]]# toml
+[[plugins]]
 repo = 'cespare/vim-toml'
 
-[[plugins]]# かっこの補完
+[[plugins]]
 repo = 'cohama/lexima.vim'
 
 [[plugins]]
@@ -256,7 +256,23 @@ repo = 'nvim-treesitter/nvim-treesitter'
 merged = 0
 hook_post_source = '''
 lua <<EOF
-  require('init')
+  require('nvim-treesitter.configs').setup {
+      highlight = {
+          enable = true,                    -- false will disable the whole extension
+          disable = {  },                   -- list of language that will be disabled
+      },
+      incremental_selection = {
+          enable = true,
+          disable = {  },
+          keymaps = {                       -- mappings for incremental selection (visual mappings)
+            init_selection = 'gnn',         -- maps in normal mode to init the node/scope selection
+            node_incremental = "grn",       -- increment to the upper named parent
+            scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
+            node_decremental = "grm",       -- decrement to the previous node
+          }
+      },
+      -- ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
+  }
 EOF
 '''
 
@@ -342,27 +358,27 @@ repo = 'nvim-lua/plenary.nvim'
 repo = 'nvim-lua/telescope.nvim'
 depends = ['popup.nvim', 'plenary.nvim']
 hook_add = '''
-	nmap <silent> <C-f><C-l> <cmd>Telescope find_files theme=get_ivy<CR>
-	nmap <silent> <C-g> <cmd>Telescope live_grep theme=get_ivy<CR>
-	nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
-	nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
+  nmap <silent> <C-f><C-l> <cmd>Telescope find_files theme=get_ivy<CR>
+  nmap <silent> <C-g> <cmd>Telescope live_grep theme=get_ivy<CR>
+  nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
+  nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
 '''
 hook_post_source = '''
 lua << EOF
 local actions = require('telescope.actions')
 
 require('telescope').setup{
-	defaults = {
-		winblend = 35,
-		mappings = {
-			i = {
-				["<c-x>"] = false,
-				["<c-s>"] = actions.select_vertical,
-				["<Tab>"] = actions.toggle_selection,
-				['<C-q>'] = actions.send_selected_to_qflist,
-			}
-		}
-	}
+  defaults = {
+    winblend = 35,
+    mappings = {
+      i = {
+        ["<c-x>"] = false,
+        ["<c-s>"] = actions.select_vertical,
+        ["<Tab>"] = actions.toggle_selection,
+        ['<C-q>'] = actions.send_selected_to_qflist,
+      }
+    }
+  }
 }
 EOF
 '''
@@ -390,6 +406,7 @@ EOF
 
 # [[plugins]]
 # repo = 'kkoomen/vim-doge'
+
 [[plugins]]
 repo = 'pyonk/campfire.vim'
 
@@ -408,6 +425,14 @@ hook_add = '''
 
 [[plugins]]
 repo = 'folke/todo-comments.nvim'
+hook_post_source = '''
+lua << EOF
+require("todo-comments").setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+}
+EOF
+'''
 
 [[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
