@@ -1,5 +1,4 @@
 {
-  "vetur.trace.server": "verbose",
   "emmet.includeLanguages": {"eruby": "html", "vue": "html"},
   "codeLens.enable": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
@@ -13,7 +12,8 @@
   "diagnostic.hintSign": "💡",
   "diagnostic.virtualText": false,
   "diagnostic.messageTarget": "float",
-  "diagnostic.virtualTextPrefix": "▶︎ ",
+  "diagnostic.virtualTextPrefix": "● ",
+  "diagnostic.refreshOnInsertMode": true,
   "suggest.enablePreview": true,
   "coc.preferences.colorSupport": true,
   "python.analysis.typeCheckingMode": "off",

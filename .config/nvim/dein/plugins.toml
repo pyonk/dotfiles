@@ -7,7 +7,6 @@ hook_add = '''
   nmap <silent> gy <Plug>(coc-type-definition)
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
-  " nmap <silent> ge :<C-u>CocCommand explorer<CR>
 
   nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
   nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
@@ -23,7 +22,7 @@ hook_add = '''
   inoremap <silent><expr> <c-space> coc#refresh()
 
   " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+  command! -nargs=? Fold :call CocAction('fold', <f-args>)
 
   " Remap for rename current word
   nmap <C-c><C-r> <Plug>(coc-rename)
@@ -76,7 +75,9 @@ hook_add = '''
 '''
 
 hook_post_source = '''
-  autocmd VimEnter * call vista#RunForNearestMethodOrFunction()
+if v:vim_did_enter
+  call vista#RunForNearestMethodOrFunction()
+endif
 '''
 
 [[plugins]]
@@ -188,6 +189,9 @@ repo = 'cespare/vim-toml'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
+hook_add = '''
+autocmd FileType TelescopePrompt let b:lexima_disabled = 1
+'''
 
 [[plugins]]
 repo = 'machakann/vim-sandwich'
@@ -358,7 +362,8 @@ repo = 'nvim-lua/plenary.nvim'
 repo = 'nvim-lua/telescope.nvim'
 depends = ['popup.nvim', 'plenary.nvim']
 hook_add = '''
-  nmap <silent> <C-f><C-l> <cmd>Telescope find_files theme=get_ivy<CR>
+  nmap <silent> <C-f><C-l> <cmd>Telescope find_files find_command=rg,--smart-case,--files,--hidden,--follow theme=get_ivy<CR>
+  nmap <silent> <C-g> <cmd>Telescope live_grep vimgrep_arguments=rg,--hidden,--column,--line-number,--no-heading,--smart-case theme=get_ivy only_sort_text=true<CR>
   nmap <silent> <C-g> <cmd>Telescope live_grep theme=get_ivy<CR>
   nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
   nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
@@ -378,29 +383,18 @@ require('telescope').setup{
         ['<C-q>'] = actions.send_selected_to_qflist,
       }
     }
-  }
+  },
 }
 EOF
 '''
 
 [[plugins]]
-repo = 'nvim-telescope/telescope-fzf-writer.nvim'
+repo = 'nvim-telescope/telescope-fzf-native.nvim'
 depends = ['telescope.nvim']
+build = 'make'
 hook_post_source = '''
 lua << EOF
-require('telescope').setup {
-    extensions = {
-        fzf_writer = {
-            minimum_grep_characters = 3,
-            minimum_files_characters = 3,
-
-            -- Disabled by default.
-            -- Will probably slow down some aspects of the sorter, but can make color highlights.
-            -- I will work on this more later.
-            use_highlighter = true,
-        }
-    }
-}
+require('telescope').load_extension('fzf')
 EOF
 '''
 
@@ -419,9 +413,10 @@ hook_add = '''
 
 [[plugins]]
 repo = 'folke/trouble.nvim'
-hook_add = '''
-  nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
-'''
+depends = ['telescope.nvim']
+# hook_add = '''
+#   nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
+# '''
 
 [[plugins]]
 repo = 'folke/todo-comments.nvim'
