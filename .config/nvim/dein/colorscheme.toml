@@ -21,9 +21,9 @@ repo = 'cocopon/iceberg.vim'
 [[plugins]]
 repo = 'folke/tokyonight.nvim'
 hook_add = '''
-  let g:tokyonight_style = 'night' " available: night, storm, day
+  let g:tokyonight_style = 'day' " available: night, storm, day
   let g:tokyonight_sidebars = [ "qf", "vista", "vista_kind", "terminal", "fern" ]
-  set background=dark
+  set background=light
   colorscheme tokyonight
 '''
 

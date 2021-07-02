@@ -146,6 +146,9 @@ vnoremap K :m '<-2<CR>gv=gv
 " html
 autocmd Filetype html setlocal ts=4 sw=4 expandtab
 
+" markdown
+autocmd Filetype markdown setlocal ts=2 sw=2
+
 " javascript
 let g:javascript_enable_domhtmlcss = 1
 

@@ -21,9 +21,6 @@ hook_add = '''
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
 
-  " Add `:Fold` command to fold current buffer.
-  command! -nargs=? Fold :call CocAction('fold', <f-args>)
-
   " Remap for rename current word
   nmap <C-c><C-r> <Plug>(coc-rename)
   " Highlight symbol under cursor on CursorHold
@@ -258,6 +255,10 @@ repo = 'lambdalisue/readablefold.vim'
 [[plugins]]
 repo = 'nvim-treesitter/nvim-treesitter'
 merged = 0
+hook_add = '''
+set foldmethod=expr
+set foldexpr=nvim_treesitter#foldexpr()
+'''
 hook_post_source = '''
 lua <<EOF
   require('nvim-treesitter.configs').setup {
@@ -349,7 +350,7 @@ autocmd BufNewFile,BufRead *.rs  let g:quickrun_config.rust = {"exec" : "cargo r
 [[plugins]]
 repo = 'phaazon/hop.nvim'
 hook_post_source = '''
-   nmap <C-f><C-f> <cmd>HopWord<CR>
+  nmap <C-f><C-f> <cmd>HopWord<CR>
 '''
 
 [[plugins]]
@@ -392,11 +393,11 @@ EOF
 repo = 'nvim-telescope/telescope-fzf-native.nvim'
 depends = ['telescope.nvim']
 build = 'make'
-hook_post_source = '''
-lua << EOF
-require('telescope').load_extension('fzf')
-EOF
-'''
+# hook_post_source = '''
+# lua << EOF
+# require('telescope').load_extension('fzf')
+# EOF
+# '''
 
 # [[plugins]]
 # repo = 'kkoomen/vim-doge'
