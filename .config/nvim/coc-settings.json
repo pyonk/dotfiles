@@ -2,6 +2,7 @@
   "emmet.includeLanguages": {"eruby": "html", "vue": "html"},
   "codeLens.enable": true,
   "coc.preferences.currentFunctionSymbolAutoUpdate": true,
+  "diagnostic.locationlistUpdate": true,
   "git.addedSign.text": "ǁ",
   "git.removedSign.text": "ǁ",
   "git.changedSign.text": "ǁ",

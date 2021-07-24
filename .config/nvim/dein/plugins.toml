@@ -258,6 +258,7 @@ merged = 0
 hook_add = '''
 set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
+set foldlevel=99
 '''
 hook_post_source = '''
 lua <<EOF
@@ -414,10 +415,11 @@ hook_add = '''
 
 [[plugins]]
 repo = 'folke/trouble.nvim'
-depends = ['telescope.nvim']
-# hook_add = '''
-#   nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
-# '''
+depends = ['telescope.nvim', 'coc.nvim']
+hook_add = '''
+au User CocDiagnosticChange lua require'trouble'.refresh({auto = true, provider = "loclist"})
+nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
+'''
 
 [[plugins]]
 repo = 'folke/todo-comments.nvim'
@@ -432,3 +434,11 @@ EOF
 
 [[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
+
+[[plugins]]
+repo = 'folke/twilight.nvim'
+depends = ['nvim-treesitter']
+
+[[plugins]]
+repo = 'pwntester/octo.nvim'
+depends = ['telescope.nvim']
