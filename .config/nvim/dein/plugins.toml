@@ -54,135 +54,11 @@ hook_post_source = '''
   nmap <silent> <leader>a :<C-u>set operatorfunc=<SID>cocActionsOpenFromSelected<CR>g@
 '''
 
-
-[[plugins]]
-repo = 'liuchengxu/vista.vim'
-depends = ['coc.nvim']
-hook_add = '''
-  let g:vista_default_executive = 'coc'
-  let g:vista_echo_cursor_strategy='floating_win'
-  let g:vista#renderer#enable_icon = 1
-  let g:vista_highlight_whole_line = 1
-  let g:vista#renderer#icons = {
-\   "function": "\uf794",
-\   "variable": "\uf71b",
-\  }
-  nmap <silent> <C-f><C-v> :<C-u>Vista<CR>
-  " nmap <silent> <C-f><C-s> :<C-u>Vista finder<CR>
-'''
-
-hook_post_source = '''
-if v:vim_did_enter
-  call vista#RunForNearestMethodOrFunction()
-endif
-'''
-
-[[plugins]]
-repo = 'Shougo/deol.nvim'
-
-# [[plugins]]
-# repo = '/usr/local/opt/fzf'
-
-# [[plugins]]
-# repo = 'junegunn/fzf.vim'
-# depends = 'fzf'
-# hook_add = '''
-
-# let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.6 } }
-# let s:options = {'options': ['--layout=reverse', '--info=inline']}
-
-# " nmap <silent> <C-g> :<C-u>Rg<CR>
-
-# command! -bang -nargs=* Rg
-#   \ call fzf#vim#grep(
-#   \  "rg --hidden --column --line-number --no-heading --color=always --smart-case --glob '!.git/*' -- ".shellescape(<q-args>), 1,
-#   \  extend(fzf#vim#with_preview(), {'options': '--delimiter : --nth 4..'}), <bang>0)
-# command! -bang -nargs=? -complete=dir FilesWithPreview
-#   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-
-# " nmap <silent> <C-f><C-f> :<C-u>FilesWithPreview<CR>
-# " noremap <silent><C-f><C-r> :<C-u>FZFMru<CR>
-# command! FZFMru call fzf#run(extend(extend({
-#     \ 'sink':    'e',
-#     \ 'source':  v:oldfiles,
-#     \ 'options': '-m -x +s',
-#     \ 'down': '40%',
-#     \ }, g:fzf_layout), s:options))
-# '''
-
 [[plugins]]
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
-repo = 'lambdalisue/fern.vim'
-hook_post_source = '''
-  nmap <silent> ge :<C-u>Fern . -reveal=%<CR>
-  nmap <silent> <Leader>ge :<C-u>Fern . -drawer -reveal=% -toggle<CR>
-'''
-[[plugins]]
 repo = 'lambdalisue/nerdfont.vim'
-
-[[plugins]]
-repo = 'lambdalisue/fern-git-status.vim'
-depends = ['fern.vim']
-
-[[plugins]]
-repo = 'lambdalisue/fern-renderer-nerdfont.vim'
-depends = ['fern.vim', 'nerdfont.vim']
-hook_add = '''
-  let g:fern#renderer = "nerdfont"
-'''
-
-[[plugins]]
-repo = 'lambdalisue/gina.vim'
-hook_post_source = '''
-    noremap <silent><C-s><C-s> :<C-u>Gina status<CR>
-    call gina#custom#command#alias('branch', 'br')
-    call gina#custom#command#option('br', '-v', 'v')
-    call gina#custom#command#option(
-      \ '/\%(log\|reflog\)',
-      \ '--opener', 'vsplit'
-      \)
-    call gina#custom#command#option(
-      \ 'log', '--group', 'log-viewer'
-      \)
-    call gina#custom#command#option(
-      \ 'reflog', '--group', 'reflog-viewer'
-      \)
-    call gina#custom#command#option(
-      \ 'diff', '--group', 'diff'
-      \)
-    call gina#custom#command#option(
-      \ 'commit', '-v|--verbose'
-      \)
-    call gina#custom#mapping#nmap(
-      \ 'status', '<C-c><C-c>',
-      \ ':<C-u>Gina commit<CR>',
-      \ {'noremap': 1, 'silent': 1}
-      \)
-    call gina#custom#mapping#nmap(
-      \ 'commit', '<C-s><C-s>',
-      \ ':<C-u>Gina status<CR>',
-      \ {'noremap': 1, 'silent': 1}
-      \)
-    call gina#custom#execute(
-      \ '/\%(status\|branch\|ls\|grep\|changes\|tag\)',
-      \ 'setlocal winfixheight',
-      \)
-    call gina#custom#mapping#nmap(
-      \ 'status', 'dj',
-      \ 'j:<C-u>call gina#action#call("diff:preview:top")<CR>',
-      \ {'noremap': 1, 'silent': 1}
-      \)
-    call gina#custom#mapping#nmap(
-      \ 'status', 'dk',
-      \ 'k:<C-u>call gina#action#call("diff:preview:top")<CR>',
-      \ {'noremap': 1, 'silent': 1}
-      \)
-'''
-
-[[plugins]]
-repo = 'cespare/vim-toml'
 
 [[plugins]]
 repo = 'cohama/lexima.vim'
@@ -223,21 +99,7 @@ hook_add = '''
 repo = 'wakatime/vim-wakatime'
 
 [[plugins]]
-repo = 'simeji/winresizer'
-
-[[plugins]]
 repo='mbbill/undotree'
-
-[[plugins]]
-repo = 'tpope/vim-surround'
-
-[[plugins]]
-repo='janko/vim-test'
-hook_add = '''
-  nmap <silent> <C-t> :TestNearest<CR>
-  let g:test#strategy = "asyncrun"
-'''
-depends = ['asyncrun.vim']
 
 [[plugins]]
 repo='skywind3000/asyncrun.vim'
@@ -245,9 +107,6 @@ hook_add = '''
   let g:asyncrun_open = 14
   " autocmd User AsyncRunStop copen | $ | wincmd p
 '''
-
-[[plugins]]
-repo = 'lambdalisue/edita.vim'
 
 [[plugins]]
 repo = 'lambdalisue/readablefold.vim'
@@ -267,6 +126,9 @@ lua <<EOF
           enable = true,                    -- false will disable the whole extension
           disable = {  },                   -- list of language that will be disabled
       },
+      indent = {
+        enable = true
+      },
       incremental_selection = {
           enable = true,
           disable = {  },
@@ -277,140 +139,19 @@ lua <<EOF
             node_decremental = "grm",       -- decrement to the previous node
           }
       },
-      -- ensure_installed = 'all' -- one of 'all', 'language', or a list of languages
+      ensure_installed = { "ruby", "go", "javascript", "typescript", "html", "scss", "css", "vim", "vue", "yaml", "comment" } -- one of 'all', 'language', or a list of languages
   }
 EOF
 '''
-
-# highlight default link TSPunctDelimiter Delimiter
-# highlight default link TSPunctBracket Delimiter
-# highlight default link TSPunctSpecial Delimiter
-
-# highlight default link TSConstant Constant
-# highlight default link TSConstBuiltin Special
-# highlight default link TSConstMacro Define
-# highlight default link TSString String
-# highlight default link TSStringRegex String
-# highlight default link TSStringEscape SpecialChar
-# highlight default link TSCharacter Character
-# highlight default link TSNumber Number
-# highlight default link TSBoolean Boolean
-# highlight default link TSFloat Float
-
-# highlight default link TSFunction Function
-# highlight default link TSFuncBuiltin Special
-# highlight default link TSFuncMacro Macro
-# highlight default link TSParameter Identifier
-# highlight default link TSParameterReference TSParameter
-# highlight default link TSMethod Function
-# highlight default link TSField Identifier
-# highlight default link TSProperty Identifier
-# highlight default link TSConstructor Special
-# highlight default link TSAnnotation PreProc
-# highlight default link TSAttribute PreProc
-# highlight default link TSNamespace Include
-
-# highlight default link TSConditional Conditional
-# highlight default link TSRepeat Repeat
-# highlight default link TSLabel Label
-# highlight default link TSOperator Operator
-# highlight default link TSKeyword Keyword
-# highlight default link TSKeywordFunction Keyword
-# highlight default link TSKeywordOperator TSOperator
-# highlight default link TSException Exception
-
-# highlight default link TSType Type
-# highlight default link TSTypeBuiltin Type
-# highlight default link TSInclude Include
-
-# highlight default link TSVariableBuiltin Special
-
-# highlight default link TSText TSNone
-# highlight default TSStrong term=bold cterm=bold gui=bold
-# highlight default TSEmphasis term=italic cterm=italic gui=italic
-# highlight default TSUnderline term=underline cterm=underline gui=underline
-# highlight default link TSTitle Title
-# highlight default link TSLiteral String
-# highlight default link TSURI Underlined
-
-# highlight default link TSTag Label
-# highlight default link tstagdelimiter delimiter
-# '''
 
 [[plugins]]
 repo = 'vigoux/treesitter-context.nvim'
 depends = ['nvim-treesitter']
 
 [[plugins]]
-repo = 'thinca/vim-quickrun'
-hook_add = '''
-let g:quickrun_config = {}
-autocmd BufNewFile,BufRead *.rs  let g:quickrun_config.rust = {"exec" : "cargo run"}
-'''
-
-[[plugins]]
 repo = 'phaazon/hop.nvim'
 hook_post_source = '''
   nmap <C-f><C-f> <cmd>HopWord<CR>
-'''
-
-[[plugins]]
-repo = 'nvim-lua/popup.nvim'
-
-[[plugins]]
-repo = 'nvim-lua/plenary.nvim'
-
-[[plugins]]
-repo = 'nvim-lua/telescope.nvim'
-depends = ['popup.nvim', 'plenary.nvim']
-hook_add = '''
-  nmap <silent> <C-f><C-l> <cmd>Telescope find_files find_command=rg,--smart-case,--files,--hidden,--follow theme=get_ivy<CR>
-  nmap <silent> <C-g> <cmd>Telescope live_grep vimgrep_arguments=rg,--hidden,--column,--line-number,--no-heading,--smart-case theme=get_ivy only_sort_text=true<CR>
-  nmap <silent> <C-g> <cmd>Telescope live_grep theme=get_ivy<CR>
-  nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
-  nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
-'''
-hook_post_source = '''
-lua << EOF
-local actions = require('telescope.actions')
-
-require('telescope').setup{
-  defaults = {
-    winblend = 35,
-    mappings = {
-      i = {
-        ["<c-x>"] = false,
-        ["<c-s>"] = actions.select_vertical,
-        ["<Tab>"] = actions.toggle_selection,
-        ['<C-q>'] = actions.send_selected_to_qflist,
-      }
-    }
-  },
-}
-EOF
-'''
-
-[[plugins]]
-repo = 'nvim-telescope/telescope-fzf-native.nvim'
-depends = ['telescope.nvim']
-build = 'make'
-# hook_post_source = '''
-# lua << EOF
-# require('telescope').load_extension('fzf')
-# EOF
-# '''
-
-# [[plugins]]
-# repo = 'kkoomen/vim-doge'
-
-[[plugins]]
-repo = 'pyonk/campfire.vim'
-
-[[plugins]]
-repo = 'delphinus/telescope-memo.nvim'
-depends = ['telescope.nvim']
-hook_add = '''
-  nmap <silent> <C-m><C-l> <cmd>:Telescope memo list<CR>
 '''
 
 [[plugins]]
@@ -436,9 +177,25 @@ EOF
 repo = 'kyazdani42/nvim-web-devicons'
 
 [[plugins]]
-repo = 'folke/twilight.nvim'
-depends = ['nvim-treesitter']
+repo = 'nvim-lua/plenary.nvim'
 
 [[plugins]]
-repo = 'pwntester/octo.nvim'
-depends = ['telescope.nvim']
+repo = 'lewis6991/gitsigns.nvim'
+depends = ['plenary.nvim']
+hook_add = '''
+lua << EOF
+require("gitsigns").setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '‖', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '‖', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = true, -- Toggle with `:Gitsigns toggle_word_diff`
+}
+EOF
+'''

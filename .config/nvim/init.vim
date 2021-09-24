@@ -45,8 +45,10 @@ if dein#load_state('~/.cache/dein')
   call dein#load_toml(s:toml_dir . '/plantuml.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/graphql.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/slim.toml', {'lazy': 1})
+  call dein#load_toml(s:toml_dir . '/toml.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/lazy.toml', {'lazy': 1})
   call dein#load_toml(s:toml_dir . '/colorscheme.toml', {'lazy': 0})
+  call dein#load_toml(s:toml_dir . '/denops.toml', {'lazy': 0})
 
   " Required:
   call dein#end()

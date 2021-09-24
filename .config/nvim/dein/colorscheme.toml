@@ -20,12 +20,12 @@ repo = 'cocopon/iceberg.vim'
 
 [[plugins]]
 repo = 'folke/tokyonight.nvim'
-# hook_add = '''
-#   let g:tokyonight_style = 'day' " available: night, storm, day
-#   let g:tokyonight_sidebars = [ "qf", "vista", "vista_kind", "terminal", "fern" ]
-#   set background=light
-#   colorscheme tokyonight
-# '''
+hook_add = '''
+  let g:tokyonight_style = 'day' " available: night, storm, day
+  let g:tokyonight_sidebars = [ "qf", "vista", "vista_kind", "terminal", "fern" ]
+  set background=light
+  colorscheme tokyonight
+'''
 
 [[plugins]]
 repo = 'dracula/vim'
@@ -42,10 +42,10 @@ repo = 'sainnhe/edge'
 
 [[plugins]]
 repo = 'rose-pine/neovim'
-hook_add = '''
-lua << EOF
-vim.g.rose_pine_variant = 'base' -- base or moon or dawn
-require('rose-pine').set()
-EOF
-'''
+# hook_add = '''
+# lua << EOF
+# vim.g.rose_pine_variant = 'dawn' -- base or moon or dawn
+# require('rose-pine').set()
+# EOF
+# '''
 

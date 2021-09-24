@@ -157,10 +157,10 @@ font:
 draw_bold_text_with_bright_colors: true
 
 import:
-  # - ~/.config/alacritty/colors/tokyonight-day.yml
+  - ~/.config/alacritty/colors/tokyonight-day.yml
   # - ~/.config/alacritty/colors/iceberge-dark.yml
   # - ~/.config/alacritty/colors/iceberge-light.yml
-  - ~/.config/alacritty/colors/rose-pine.yml
+  # - ~/.config/alacritty/colors/rose-pine.yml
   # - ~/.config/alacritty/colors/rose-pine-moon.yml
   # - ~/.config/alacritty/colors/rose-pine-dawn.yml
 
