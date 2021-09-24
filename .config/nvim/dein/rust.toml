@@ -1,0 +1,6 @@
+[[plugins]]
+on_ft = 'rust'
+repo = 'rust-lang/rust.vim'
+hook_add = '''
+let g:rustfmt_autosave = 1
+'''
