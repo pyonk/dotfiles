@@ -195,9 +195,6 @@ on_cmd = 'CAMPFIRE'
 [[plugins]]
 repo = 'nvim-lua/plenary.nvim'
 on_lua = ['plenary']
-hook_source = '''
-echom 'prenaly'
-'''
 
 [[plugins]]
 repo = 'lewis6991/gitsigns.nvim'
@@ -231,9 +228,6 @@ require("todo-comments").setup {
   -- or leave it empty to use the default settings
 }
 EOF
-'''
-hook_source = '''
-echom 'todo-comments'
 '''
 
 [[plugins]]

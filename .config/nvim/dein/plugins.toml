@@ -110,7 +110,6 @@ set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 '''
 hook_source = '''
-echom 'nvim-treesitter hook_source'
 lua << EOF
   require('nvim-treesitter.configs').setup {
       highlight = {
