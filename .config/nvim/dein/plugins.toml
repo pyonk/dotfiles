@@ -58,9 +58,6 @@ hook_post_source = '''
 repo = 'tpope/vim-commentary'
 
 [[plugins]]
-repo = 'lambdalisue/nerdfont.vim'
-
-[[plugins]]
 repo = 'cohama/lexima.vim'
 hook_add = '''
 autocmd FileType TelescopePrompt let b:lexima_disabled = 1
@@ -102,13 +99,6 @@ repo = 'wakatime/vim-wakatime'
 repo='mbbill/undotree'
 
 [[plugins]]
-repo='skywind3000/asyncrun.vim'
-hook_add = '''
-  let g:asyncrun_open = 14
-  " autocmd User AsyncRunStop copen | $ | wincmd p
-'''
-
-[[plugins]]
 repo = 'lambdalisue/readablefold.vim'
 
 [[plugins]]
@@ -119,15 +109,16 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 '''
-hook_post_source = '''
-lua <<EOF
+hook_source = '''
+echom 'nvim-treesitter hook_source'
+lua << EOF
   require('nvim-treesitter.configs').setup {
       highlight = {
           enable = true,                    -- false will disable the whole extension
           disable = {  },                   -- list of language that will be disabled
       },
       indent = {
-        enable = true
+        enable = false
       },
       incremental_selection = {
           enable = true,
@@ -145,57 +136,6 @@ EOF
 '''
 
 [[plugins]]
-repo = 'vigoux/treesitter-context.nvim'
+repo = 'romgrk/nvim-treesitter-context'
 depends = ['nvim-treesitter']
 
-[[plugins]]
-repo = 'phaazon/hop.nvim'
-hook_post_source = '''
-  nmap <C-f><C-f> <cmd>HopWord<CR>
-'''
-
-[[plugins]]
-repo = 'folke/trouble.nvim'
-depends = ['telescope.nvim', 'coc.nvim']
-hook_add = '''
-au User CocDiagnosticChange lua require'trouble'.refresh({auto = true, provider = "loclist"})
-nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
-'''
-
-[[plugins]]
-repo = 'folke/todo-comments.nvim'
-hook_post_source = '''
-lua << EOF
-require("todo-comments").setup {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-}
-EOF
-'''
-
-[[plugins]]
-repo = 'kyazdani42/nvim-web-devicons'
-
-[[plugins]]
-repo = 'nvim-lua/plenary.nvim'
-
-[[plugins]]
-repo = 'lewis6991/gitsigns.nvim'
-depends = ['plenary.nvim']
-hook_add = '''
-lua << EOF
-require("gitsigns").setup {
-  signs = {
-    add          = {hl = 'GitSignsAdd'   , text = '‖', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
-    change       = {hl = 'GitSignsChange', text = '‖', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
-    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
-  },
-  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
-  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
-  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
-  word_diff  = true, -- Toggle with `:Gitsigns toggle_word_diff`
-}
-EOF
-'''

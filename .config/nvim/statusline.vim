@@ -38,7 +38,9 @@ function! NearestMethodOrFunction() abort
 endfunction
 
 function! GetBranch() abort
-    let l:currentBranch = gina#component#repo#branch()
+    " let l:currentBranch = gina#component#repo#branch()
+    let l:currentBranch = get(b:, 'gitsigns_head', '')
+
     if l:currentBranch != ''
         return ' '.l:currentBranch
     endif

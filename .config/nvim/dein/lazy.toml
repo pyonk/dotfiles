@@ -1,7 +1,7 @@
 [[plugins]]
 repo = 'liuchengxu/vista.vim'
-depends = ['coc.nvim']
 on_cmd = 'Vista'
+on_map = ['<C-f><C-v>']
 hook_source = '''
   let g:vista_default_executive = 'coc'
   let g:vista_echo_cursor_strategy='floating_win'
@@ -15,7 +15,7 @@ hook_source = '''
   " nmap <silent> <C-f><C-s> :<C-u>Vista finder<CR>
 '''
 
-hook_post_source = '''
+hook_add = '''
 if v:vim_did_enter
   call vista#RunForNearestMethodOrFunction()
 endif
@@ -27,9 +27,13 @@ on_cmd = 'Deol'
 on_map = '<Plug>'
 
 [[plugins]]
+repo = 'kyazdani42/nvim-web-devicons'
+depends = ['fern.vim']
+
+[[plugins]]
 repo = 'lambdalisue/fern.vim'
 on_cmd = 'Fern'
-on_map = 'ge'
+on_map = ['ge', ',ge']
 hook_source = '''
   nmap <silent> ge :<C-u>Fern . -reveal=%<CR>
   nmap <silent> <Leader>ge :<C-u>Fern . -drawer -reveal=% -toggle<CR>
@@ -38,20 +42,24 @@ depends = ['fern-renderer-nerdfont.vim', 'fern-git-status.vim']
 
 [[plugins]]
 repo = 'lambdalisue/fern-git-status.vim'
+depends = ['fern.vim']
 
 [[plugins]]
 repo = 'lambdalisue/fern-renderer-nerdfont.vim'
-depends = ['nerdfont.vim']
+depends = ['nvim-web-devicons']
 hook_source = '''
   let g:fern#renderer = "nerdfont"
 '''
 
 [[plugins]]
+repo = 'lambdalisue/nerdfont.vim'
+
+[[plugins]]
 repo = 'lambdalisue/gina.vim'
 on_cmd = 'Gina'
-on_func = 'gina#component#repo#branch()'
+on_map = ['<Plug>', '<C-s><C-s>']
 hook_source = '''
-    noremap <silent><C-s><C-s> :<C-u>Gina status<CR>
+    noremap <silent><C-s><C-s> <cmd>Gina status<CR>
     call gina#custom#command#alias('branch', 'br')
     call gina#custom#command#option('br', '-v', 'v')
     call gina#custom#command#option(
@@ -101,14 +109,30 @@ repo = 'simeji/winresizer'
 on_map = '<C-e>'
 
 [[plugins]]
+repo='skywind3000/asyncrun.vim'
+hook_add = '''
+  let g:asyncrun_open = 14
+  " autocmd User AsyncRunStop copen | $ | wincmd p
+'''
+
+[[plugins]]
 repo='janko/vim-test'
 on_cmd = ['TestNearest', 'TestSuite', 'TestFile', 'TestLast', 'TestVisit']
-on_map = '<C-t>'
+on_map = ['<C-t>']
+depends = ['asyncrun.vim']
+hook_add = '''
+  nmap <C-t> :TestNearest<CR>
+'''
 hook_source = '''
-  nmap <silent> <C-t> :TestNearest<CR>
   let g:test#strategy = "asyncrun"
 '''
-depends = ['asyncrun.vim']
+
+[[plugins]]
+repo = 'phaazon/hop.nvim'
+on_map = ['<C-f><C-f>']
+hook_add = '''
+  nmap <C-f><C-f> <cmd>HopWord<CR>
+'''
 
 [[plugins]]
 repo = 'thinca/vim-quickrun'
@@ -120,20 +144,19 @@ autocmd BufNewFile,BufRead *.rs  let g:quickrun_config.rust = {"exec" : "cargo r
 
 [[plugins]]
 repo = 'nvim-lua/popup.nvim'
+depends = ['telescope.nvim']
 
 [[plugins]]
 repo = 'nvim-lua/telescope.nvim'
 on_lua = ['telescope']
 on_cmd = 'Telescope'
-on_map = {n = ['<Plug>(Telescope', '<C-f><C-l>'], c = ['<Plug>(Telescope']}
-depends = ['popup.nvim', 'plenary.nvim', 'telescope-memo.nvim']
+on_map = {n = ['<Plug>(Telescope', '<C-f><C-l>', '<C-g>', '<C-f><C-r>', '<C-f><C-s>'], c = ['<Plug>(Telescope']}
+depends = ['plenary.nvim', 'popup.nvim']
 hook_source = '''
   nmap <silent> <C-f><C-l> <cmd>Telescope find_files find_command={"rg","--smart-case","--files","--hidden","--follow","-g","!.git/*"} theme=get_ivy<CR>
   nmap <silent> <C-g> <cmd>Telescope live_grep vimgrep_arguments=rg,--hidden,--column,--line-number,--no-heading,--smart-case theme=get_ivy only_sort_text=true<CR>
-  nmap <silent> <C-g> <cmd>Telescope live_grep theme=get_ivy<CR>
   nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
   nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
-
 lua << EOF
 local actions = require('telescope.actions')
 
@@ -160,7 +183,6 @@ build = 'make'
 
 [[plugins]]
 repo = 'delphinus/telescope-memo.nvim'
-on_cmd = '<cmd>Telescope memo list'
 on_map = '<C-m><C-l>'
 hook_source = '''
   nmap <silent> <C-m><C-l> <cmd>Telescope memo list<CR>
@@ -170,3 +192,56 @@ hook_source = '''
 repo = 'pyonk/campfire.vim'
 on_cmd = 'CAMPFIRE'
 
+[[plugins]]
+repo = 'nvim-lua/plenary.nvim'
+on_lua = ['plenary']
+hook_source = '''
+echom 'prenaly'
+'''
+
+[[plugins]]
+repo = 'lewis6991/gitsigns.nvim'
+on_lua = ['gitsigns']
+depends = ['plenary.nvim']
+hook_add = '''
+lua << EOF
+require("gitsigns").setup {
+  signs = {
+    add          = {hl = 'GitSignsAdd'   , text = '‖', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+    change       = {hl = 'GitSignsChange', text = '‖', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+    changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+  },
+  signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+  numhl      = false, -- Toggle with `:Gitsigns toggle_numhl`
+  linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+  word_diff  = true, -- Toggle with `:Gitsigns toggle_word_diff`
+}
+EOF
+'''
+
+[[plugins]]
+repo = 'folke/todo-comments.nvim'
+on_lua = ['todo-comments']
+hook_add = '''
+lua << EOF
+require("todo-comments").setup {
+  -- your configuration comes here
+  -- or leave it empty to use the default settings
+}
+EOF
+'''
+hook_source = '''
+echom 'todo-comments'
+'''
+
+[[plugins]]
+repo = 'folke/trouble.nvim'
+on_lua = ['trouble']
+on_cmd = ['LspTroubleToggle']
+depends = ['telescope.nvim', 'coc.nvim']
+hook_add = '''
+au User CocDiagnosticChange lua require'trouble'.refresh({auto = true, provider = "loclist"})
+nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
+'''
