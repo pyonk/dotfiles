@@ -209,7 +209,6 @@ nnoremap <silent> sv :vsplit<CR>
 
 set splitbelow
 set splitright
-nnoremap <silent> sh :Deol -split<CR>
 
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"

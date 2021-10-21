@@ -125,7 +125,7 @@ set foldmethod=expr
 set foldexpr=nvim_treesitter#foldexpr()
 set foldlevel=99
 '''
-hook_source = '''
+hook_post_source = '''
 lua << EOF
   require('nvim-treesitter.configs').setup {
       highlight = {
@@ -145,7 +145,7 @@ lua << EOF
             node_decremental = "grm",       -- decrement to the previous node
           }
       },
-      ensure_installed = { "ruby", "go", "javascript", "typescript", "html", "scss", "css", "vim", "vue", "yaml", "comment" } -- one of 'all', 'language', or a list of languages
+      ensure_installed = { "ruby", "go", "javascript", "typescript", "html", "scss", "css", "vim", "vue", "yaml", "comment", "markdown" } -- one of 'all', 'language', or a list of languages
   }
 EOF
 '''
@@ -154,3 +154,5 @@ EOF
 repo = 'romgrk/nvim-treesitter-context'
 depends = ['nvim-treesitter']
 
+[[plugins]]
+repo = 'antoinemadec/FixCursorHold.nvim'

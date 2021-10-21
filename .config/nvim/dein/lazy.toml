@@ -24,7 +24,10 @@ endif
 [[plugins]]
 repo = 'Shougo/deol.nvim'
 on_cmd = 'Deol'
-on_map = '<Plug>'
+on_map = ['sh']
+hook_source = '''
+nnoremap <silent> sh <cmd>Deol -split<CR>
+'''
 
 [[plugins]]
 repo = 'kyazdani42/nvim-web-devicons'
