@@ -11,12 +11,12 @@ hook_add = '''
   nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
   nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
 
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
+  nnoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-n>"
+  nnoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-p>"
+  inoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
+  inoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
+  vnoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-n>"
+  vnoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-p>"
 
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -42,6 +42,22 @@ hook_add = '''
 
   " for coc-snippets
   let g:coc_snippet_next = '<TAB>'
+
+  " https://vim-jp.slack.com/archives/CQ88WB7B3/p1634050547033100
+  function! s:complete_coc(argLead, cmdLine, cursorPos) abort
+    if match(a:cmdLine[0 : a:cursorPos], '\<Coc!\?\s\+\a*$') < 0
+      return ''
+    endif
+
+    if empty(get(s:, 'coc_actions', ''))
+      let s:coc_actions = join(map(getcompletion("CocAction('", 'help'), 'v:val[11:-3]'), "\n")
+    endif
+
+    return s:coc_actions
+  endfunction
+
+  command! -nargs=+ -complete=custom,s:complete_coc -bang Coc
+        \ call CocAction{<bang>0 ? '' : 'Async'}(<f-args>)
 '''
 
 hook_post_source = '''

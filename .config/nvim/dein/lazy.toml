@@ -120,18 +120,16 @@ repo='janko/vim-test'
 on_cmd = ['TestNearest', 'TestSuite', 'TestFile', 'TestLast', 'TestVisit']
 on_map = ['<C-t>']
 depends = ['asyncrun.vim']
-hook_add = '''
-  nmap <C-t> :TestNearest<CR>
-'''
 hook_source = '''
+  nmap <C-t> :TestNearest<CR>
   let g:test#strategy = "asyncrun"
 '''
 
 [[plugins]]
 repo = 'phaazon/hop.nvim'
 on_map = ['<C-f><C-f>']
-hook_add = '''
-  nmap <C-f><C-f> <cmd>HopWord<CR>
+hook_source = '''
+  nmap <silent> <C-f><C-f> <cmd>HopWord<CR>
 '''
 
 [[plugins]]
@@ -157,6 +155,7 @@ hook_source = '''
   nmap <silent> <C-g> <cmd>Telescope live_grep vimgrep_arguments=rg,--hidden,--column,--line-number,--no-heading,--smart-case theme=get_ivy only_sort_text=true<CR>
   nmap <silent> <C-f><C-r> <cmd>Telescope oldfiles theme=get_ivy<CR>
   nmap <silent> <C-f><C-s> <cmd>Telescope treesitter theme=get_ivy<CR>
+  nmap <silent> <C-f><C-b> <cmd>Telescope buffers theme=get_ivy<CR>
 lua << EOF
 local actions = require('telescope.actions')
 
