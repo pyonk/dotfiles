@@ -4,6 +4,8 @@ fpath+=$HOME/.zsh/pure
 autoload -U promptinit; promptinit
 prompt pure
 
+source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
 autoload -Uz colors
 autoload -Uz compinit
 
@@ -44,3 +46,4 @@ export EDITOR=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 [ -f ~/.zsh_profile ] && source ~/.zsh_profile
+

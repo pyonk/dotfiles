@@ -29,6 +29,7 @@
 
 !.zshrc
 !install.sh
+!Dockerfile
 
 .DS_Store
 

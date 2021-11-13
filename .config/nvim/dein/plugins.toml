@@ -144,8 +144,7 @@ lua << EOF
             scope_incremental = "grc",      -- increment to the upper scope (as defined in locals.scm)
             node_decremental = "grm",       -- decrement to the previous node
           }
-      },
-      ensure_installed = { "ruby", "go", "javascript", "typescript", "html", "scss", "css", "vim", "vue", "yaml", "comment", "markdown" } -- one of 'all', 'language', or a list of languages
+      }
   }
 EOF
 '''

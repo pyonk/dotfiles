@@ -73,9 +73,29 @@ done
 
 echo ">> installed dotfiles"
 
-
 #######
 # tpm #
 #######
 git_clone "https://github.com/tmux-plugins/tpm" $HOME/.config/tmux/plugins/tpm
 echo ">> installed tpm"
+
+############################
+# fast-syntax-highlighting #
+############################
+git_clone https://github.com/zdharma-continuum/fast-syntax-highlighting $HOME/.zsh/fast-syntax-highlighting
+echo ">> installed fast-syntax-highlighting"
+
+#######
+# fzf #
+#######
+git_clone https://github.com/junegunn/fzf.git ~/.fzf
+yes | ~/.fzf/install
+echo ">> installed fzf"
+
+########
+# dein #
+########
+curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
+sh ./installer.sh ~/.cache/dein
+rm ./installer.sh
+echo ">> installed dein.vim"
