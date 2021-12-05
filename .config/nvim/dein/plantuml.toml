@@ -1,7 +1,0 @@
-[[plugins]]
-repo = 'aklt/plantuml-syntax'
-on_ft = 'plantuml'
-
-[[plugins]]
-repo = 'scrooloose/vim-slumlord'
-on_ft = 'plantuml'

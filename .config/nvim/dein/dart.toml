@@ -1,3 +1,0 @@
-[[plugins]]
-on_ft = 'dart'
-repo = 'dart-lang/dart-vim-plugin'

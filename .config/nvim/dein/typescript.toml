@@ -1,3 +1,0 @@
-[[plugins]]
-on_ft = 'typescript'
-repo = 'leafgarland/typescript-vim'

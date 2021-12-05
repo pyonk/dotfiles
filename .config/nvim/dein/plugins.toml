@@ -112,9 +112,6 @@ hook_add = '''
 repo = 'wakatime/vim-wakatime'
 
 [[plugins]]
-repo='mbbill/undotree'
-
-[[plugins]]
 repo = 'lambdalisue/readablefold.vim'
 
 [[plugins]]

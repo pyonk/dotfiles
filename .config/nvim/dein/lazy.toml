@@ -1,8 +1,7 @@
 [[plugins]]
 repo = 'liuchengxu/vista.vim'
 on_cmd = 'Vista'
-on_map = ['<C-f><C-v>']
-hook_source = '''
+on_map = ['<C-f><C-v>'] hook_source = '''
   let g:vista_default_executive = 'coc'
   let g:vista_echo_cursor_strategy='floating_win'
   let g:vista#renderer#enable_icon = 1
@@ -132,6 +131,9 @@ hook_source = '''
 repo = 'phaazon/hop.nvim'
 on_map = ['<C-f><C-f>']
 hook_source = '''
+lua<<EOF
+require'hop'.setup()
+EOF
   nmap <silent> <C-f><C-f> <cmd>HopWord<CR>
 '''
 
@@ -186,6 +188,7 @@ build = 'make'
 [[plugins]]
 repo = 'delphinus/telescope-memo.nvim'
 on_map = '<C-m><C-l>'
+depends = ['telescope.nvim']
 hook_source = '''
   nmap <silent> <C-m><C-l> <cmd>Telescope memo list<CR>
 '''
@@ -221,25 +224,12 @@ EOF
 '''
 
 [[plugins]]
-repo = 'folke/todo-comments.nvim'
-on_lua = ['todo-comments']
-hook_add = '''
-lua << EOF
-require("todo-comments").setup {
-  -- your configuration comes here
-  -- or leave it empty to use the default settings
-}
-EOF
-'''
-
-[[plugins]]
-repo = 'folke/trouble.nvim'
-on_lua = ['trouble']
-on_cmd = ['LspTroubleToggle']
-depends = ['telescope.nvim', 'coc.nvim']
-hook_add = '''
-au User CocDiagnosticChange lua require'trouble'.refresh({auto = true, provider = "loclist"})
-nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
+repo = 'pyonk/telescope-hugo.nvim'
+on_map = ['<C-h><C-l>', '<C-h><C-n>']
+depends = ['telescope.nvim']
+hook_source = '''
+  nmap <silent> <C-h><C-l> <cmd>Telescope hugo list<CR>
+  nmap <silent> <C-h><C-n> <cmd>Telescope hugo new<CR>
 '''
 
 [[plugins]]

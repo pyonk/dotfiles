@@ -1,3 +1,0 @@
-[[plugins]]
-on_ft = ['slim']
-repo = 'slim-template/vim-slim'

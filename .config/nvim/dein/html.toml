@@ -1,16 +1,5 @@
 [[plugins]]
-on_ft=['html', 'css', 'htmldjango']
-repo = 'lilydjwg/colorizer'
-
-[[plugins]]
-on_ft=['html', 'css', 'htmldjango']
-repo = 'gregsexton/MatchTag'
-
-# [[plugins]]
-# repo =  'mattn/emmet-vim'
-# on_ft=['html', 'css', 'htmldjango']
-# hook_source = '''
-#   let g:user_emmet_leader_key='<C-e>'
-# '''
+repo =  'mattn/emmet-vim'
+on_ft=['html', 'css']
 
 

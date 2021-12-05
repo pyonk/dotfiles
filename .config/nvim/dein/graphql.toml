@@ -1,3 +1,0 @@
-[[plugins]]
-repo = 'jparise/vim-graphql'
-on_ft = 'graphql'
