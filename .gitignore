@@ -27,6 +27,10 @@
 
 !.config/flake8
 
+!.config/git/
+!.config/git/ignore
+!.config/git/config
+
 !.zshrc
 !install.sh
 !Dockerfile

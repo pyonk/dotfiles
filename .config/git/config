@@ -1,0 +1,16 @@
+[user]
+	email = yukiyoshiokap@gmail.com
+	name = pyonk
+[alias]
+	co = checkout
+	br = branch
+	ci = commit
+	st = status
+[pager]
+	log = diff-highlight | less
+	show = diff-highlight | less
+	diff = diff-highlight | less
+[color]
+	ui = auto
+[init]
+	defaultBranch = main
