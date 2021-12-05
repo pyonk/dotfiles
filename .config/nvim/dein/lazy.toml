@@ -241,3 +241,27 @@ hook_add = '''
 au User CocDiagnosticChange lua require'trouble'.refresh({auto = true, provider = "loclist"})
 nmap <silent> <C-c><C-d> :<C-u>LspTroubleToggle loclist<CR>
 '''
+
+[[plugins]]
+repo = 'previm/previm'
+on_cmd = ['PrevimOpen']
+hook_add = '''
+let g:previm_open_cmd = 'open -a Google\ Chrome'
+'''
+
+[[plugins]]
+repo   = 'aiya000/aho-bakaup.vim'
+on_cmd = [
+    'BakaupBackupExecute',
+    'BakaupEnable',
+    'BakaupDisable',
+    'BakaupArchiveBackups',
+    'BakaupSetBackupDir',
+    'BakaupExplore',
+    'BakaupTexplore',
+    'BakaupVexplore',
+    'BakaupSexplore',
+]
+hook_add = '''
+let g:bakaup_auto_backup = 1
+'''
