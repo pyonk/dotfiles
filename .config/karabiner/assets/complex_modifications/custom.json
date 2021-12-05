@@ -37,7 +37,8 @@
                   "^io\\.alacritty$",
                   "^com\\.google\\.android\\.studio$",
                   "^com\\.microsoft\\.VSCode$",
-                  "^net\\.kovidgoyal\\.kitty$"
+                  "^net\\.kovidgoyal\\.kitty$",
+                  "^com\\.jetbrains\\.intellij\\.ce$"
                 ]
               },
               {
@@ -85,7 +86,8 @@
                 "^io\\.alacritty$",
                 "^com\\.google\\.android\\.studio$",
                 "^com\\.microsoft\\.VSCode$",
-                "^net\\.kovidgoyal\\.kitty$"
+                "^net\\.kovidgoyal\\.kitty$",
+                "^com\\.jetbrains\\.intellij\\.ce$"
               ]
             },
             {
