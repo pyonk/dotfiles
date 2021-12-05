@@ -45,5 +45,3 @@ alias ls="ls -G"
 export EDITOR=nvim
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-[ -f ~/.zsh_profile ] && source ~/.zsh_profile
-
