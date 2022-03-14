@@ -26,6 +26,7 @@ on_cmd = 'Deol'
 on_map = ['sh']
 hook_source = '''
 nnoremap <silent> sh <cmd>Deol -split<CR>
+autocmd FileType deol setlocal signcolumn=no
 '''
 
 [[plugins]]
@@ -59,9 +60,7 @@ repo = 'lambdalisue/nerdfont.vim'
 [[plugins]]
 repo = 'lambdalisue/gina.vim'
 on_cmd = 'Gina'
-on_map = ['<Plug>', '<C-s><C-s>']
 hook_source = '''
-    noremap <silent><C-s><C-s> <cmd>Gina status<CR>
     call gina#custom#command#alias('branch', 'br')
     call gina#custom#command#option('br', '-v', 'v')
     call gina#custom#command#option(

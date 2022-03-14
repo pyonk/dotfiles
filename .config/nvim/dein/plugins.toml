@@ -8,6 +8,7 @@ hook_add = '''
   nmap <silent> gi <Plug>(coc-implementation)
   nmap <silent> gr <Plug>(coc-references)
 
+  nmap <silent> <C-c><C-d> <cmd>CocDiagnostic<CR>
   nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
   nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
 

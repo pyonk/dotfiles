@@ -1,6 +1,8 @@
 [user]
 	email = yukiyoshiokap@gmail.com
 	name = pyonk
+[commit]
+	verbose = true
 [alias]
 	co = checkout
 	br = branch

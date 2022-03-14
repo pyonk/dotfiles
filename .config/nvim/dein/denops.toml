@@ -4,3 +4,11 @@ repo = 'vim-denops/denops.vim'
 [[plugins]]
 repo = 'lambdalisue/guise.vim'
 depends = ['denops.vim']
+
+[[plugins]]
+repo = 'lambdalisue/gin.vim'
+depends = ['denops.vim']
+hook_source = '''
+  noremap <silent><C-s><C-s> <cmd>GinStatus<CR>
+  au FileType gin-status noremap <buffer> <C-c><C-c> <cmd>Gin commit<CR>
+'''

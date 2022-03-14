@@ -110,6 +110,7 @@ syntax on
 set ruler
 set number
 set relativenumber
+set signcolumn=yes
 set mousemodel=popup
 
 set t_Co=256
