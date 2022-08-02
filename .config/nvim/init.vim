@@ -154,6 +154,11 @@ augroup vimrc-javascript
   autocmd FileType javascript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
 augroup END
 
+augroup vimrc-typescript
+  autocmd!
+  autocmd FileType typescript set tabstop=2|set shiftwidth=2|set expandtab softtabstop=2
+augroup END
+
 augroup vimrc-vue
   autocmd!
   autocmd FileType vue setlocal expandtab shiftwidth=2 tabstop=2

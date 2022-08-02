@@ -12,12 +12,10 @@ hook_add = '''
   nmap <silent> <C-c><C-n> <Plug>(coc-diagnostic-next-error)
   nmap <silent> <C-c><C-p> <Plug>(coc-diagnostic-prev-error)
 
-  nnoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-n>"
-  nnoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-p>"
-  inoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-n> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-n>"
-  vnoremap <silent><nowait><expr> <C-p> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-p>"
+  inoremap <silent><expr> <C-n> coc#pum#visible() ? coc#pum#next(1) : "\<C-n>"
+  inoremap <silent><expr> <C-p> coc#pum#visible() ? coc#pum#prev(1) : "\<C-n>"
+  inoremap <silent><expr> <down> coc#pum#visible() ? coc#pum#next(0) : "\<down>"
+  inoremap <silent><expr> <up> coc#pum#visible() ? coc#pum#prev(0) : "\<up>"
 
   " Use <c-space> to trigger completion.
   inoremap <silent><expr> <c-space> coc#refresh()
@@ -95,7 +93,7 @@ hook_add = '''
 [[plugins]]
 repo =  'editorconfig/editorconfig-vim'
 hook_add = '''
-  let g:EditorConfig_verbose=1
+  let g:EditorConfig_verbose=0
 '''
 
 [[plugins]]
@@ -108,9 +106,6 @@ hook_add = '''
   sunmap b
   sunmap e
 '''
-
-[[plugins]]
-repo = 'wakatime/vim-wakatime'
 
 [[plugins]]
 repo = 'lambdalisue/readablefold.vim'
@@ -148,8 +143,21 @@ EOF
 '''
 
 [[plugins]]
-repo = 'romgrk/nvim-treesitter-context'
+repo = 'nvim-treesitter/nvim-treesitter-context'
 depends = ['nvim-treesitter']
+
+[[plugins]]
+repo = 'JoosepAlviste/nvim-ts-context-commentstring'
+depends = ['nvim-treesitter']
+hook_post_source = '''
+lua << EOF
+require'nvim-treesitter.configs'.setup {
+  context_commentstring = {
+    enable = true
+  }
+}
+EOF
+'''
 
 [[plugins]]
 repo = 'antoinemadec/FixCursorHold.nvim'
