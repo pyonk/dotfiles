@@ -12,3 +12,7 @@ hook_add = '''
   noremap <silent><C-s><C-s> <cmd>GinStatus<CR>
   au FileType gin-status noremap <buffer> <C-c><C-c> <cmd>Gin commit<CR>
 '''
+
+[[plugins]]
+repo = 'pyonk/dexercism.vim'
+depends = ['denops.vim']

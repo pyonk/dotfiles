@@ -1,19 +1,3 @@
-let g:python_host_prog = substitute(system('which python'), '\n\+$', '', '')
-let g:python3_host_prog = '/usr/local/bin/python3'
-let g:poetry = 0
-if exists("$VIRTUAL_ENV")
-  if !empty(glob("$VIRTUAL_ENV/bin/python3"))
-    let g:python3_host_prog = "$VIRTUAL_ENV/bin/python3"
-  else
-    let g:python_host_prog = substitute(system("which python"), '\n', '', 'g')
-  endif
-else
-  if !empty(glob(substitute(system('poetry env info --path'), '\n\+$', '', '')."/bin/python3"))
-    let g:python3_host_prog = substitute(system('poetry env info --path'), '\n\+$', '', '')."/bin/python3"
-    let g:portry = 1
-  endif
-endif
-
 "dein Scripts-----------------------------
 "
 if &compatible
@@ -181,10 +165,6 @@ augroup vimrc-python
       \ cinwords=if,elif,else,for,while,try,except,finally,def,class,with
 augroup END
 
-" vim-virtualenv
-let g:virtualenv_auto_activate = 1
-let g:virtualevn_stl_format = '%s'
-
 " クォーテーション関連
 nnoremap <Leader>q" ciw""<ESC>P
 nnoremap <Leader>q' ciw''<ESC>P
@@ -216,7 +196,7 @@ set t_ZR=^[[23m
 
 source ~/.config/nvim/statusline.vim
 
-autocmd VimEnter * call dein#call_hook('post_source')
+" autocmd VimEnter * call dein#call_hook('post_source')
 
 set colorcolumn=88
 set cursorline
