@@ -1,3 +1,22 @@
+local fn = vim.fn
+local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+if fn.empty(fn.glob(install_path)) > 0 then
+  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
+  vim.cmd [[packadd packer.nvim]]
+end
+
+require('packer').startup(function(use)
+  -- My plugins here
+  -- use 'foo1/bar1.nvim'
+  -- use 'foo2/bar2.nvim'
+
+  -- Automatically set up your configuration after cloning packer.nvim
+  -- Put this at the end after all plugins
+  if packer_bootstrap then
+    require('packer').sync()
+  end
+end)
+
 vim.cmd [[packadd packer.nvim]]
 require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
@@ -12,22 +31,28 @@ require('packer').startup(function(use)
   use {
     'glepnir/lspsaga.nvim',
     branch = 'main',
-    requires='fgheng/winbar.nvim'
   }
   use {
-    'fgheng/winbar.nvim',
-    requires='SmiteshP/nvim-gps'
-  }
-  use {
-    'SmiteshP/nvim-gps',
-    requires = "nvim-treesitter/nvim-treesitter"
+    "SmiteshP/nvim-navic",
+    requires = "neovim/nvim-lspconfig"
   }
   use { 'folke/trouble.nvim' }
   use {
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = 'vim.g.rose_pine_variant = [[moon]]',
+    'jose-elias-alvarez/null-ls.nvim',
+    requires = {
+      'nvim-lua/plenary.nvim',
+    },
+    config = function()
+      local null_ls = require('null-ls')
+      local sources = {
+        null_ls.builtins.diagnostics.eslint_d,
+        null_ls.builtins.code_actions.eslint_d,
+        null_ls.builtins.formatting.prettier,
+        null_ls.builtins.code_actions.gitsigns
+      }
+    end
   }
+  use { 'rose-pine/neovim', as = 'rose-pine' }
   use { 'nvim-treesitter/nvim-treesitter' }
   use {
     'JoosepAlviste/nvim-ts-context-commentstring',
@@ -39,7 +64,7 @@ require('packer').startup(function(use)
         }
       }
     end
-}
+  }
   use {
     'nvim-telescope/telescope.nvim',
     requires = {
@@ -64,6 +89,41 @@ require('packer').startup(function(use)
       require('hop').setup()
       vim.keymap.set('n', '<C-f><C-f>', '<cmd>HopWord<CR>')
     end
+  }
+  use { 'j-hui/fidget.nvim', config = function() require'fidget'.setup{} end }
+  use { 'gpanders/editorconfig.nvim' }
+  use { 'lukas-reineke/indent-blankline.nvim' }
+  use {
+    'petertriho/nvim-scrollbar',
+    requires = { 'kevinhwang91/nvim-hlslens' },
+    config = function()
+      require('scrollbar').setup({ handlers = { search = true } })
+    end 
+  }
+  use {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      local kopts = {noremap = true, silent = true}
+
+      vim.api.nvim_set_keymap('n', 'n',
+          [[<Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>]],
+          kopts)
+      vim.api.nvim_set_keymap('n', 'N',
+          [[<Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>]],
+          kopts)
+      vim.api.nvim_set_keymap('n', '*', [[*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      vim.api.nvim_set_keymap('n', '#', [[#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      vim.api.nvim_set_keymap('n', 'g*', [[g*<Cmd>lua require('hlslens').start()<CR>]], kopts)
+      vim.api.nvim_set_keymap('n', 'g#', [[g#<Cmd>lua require('hlslens').start()<CR>]], kopts)
+
+      vim.api.nvim_set_keymap('n', '<Leader>l', ':noh<CR>', kopts)
+    end
+  }
+  use { 'norcalli/nvim-colorizer.lua', config = function() require'colorizer'.setup() end }
+  use {
+    'nvim-lualine/lualine.nvim',
+    requires = { 'kyazdani42/nvim-web-devicons', opt = true },
+    config = function() require('lualine').setup() end
   }
   -- non lua plugins
   use {
@@ -170,7 +230,7 @@ opt.shiftwidth = 2
 opt.tabstop = 2
 opt.smarttab = true
 opt.smartindent = true
-opt.listchars = 'tab:»-,trail:-,eol:¬,extends:»,precedes:«,nbsp:%'
+opt.listchars = { tab = '損-', trail = '-', eol = '測' , extends = '損', precedes = '束', nbsp = '%' }
 opt.diffopt:append {'vertical'}
 opt.synmaxcol = 320
 opt.showmode = false
@@ -210,9 +270,9 @@ opt.fileformats = 'unix,dos,mac'
 -- Visual Settings
 -- -----------------------------------------------------------------------------
 opt.ruler = true
+vim.wo.signcolumn = 'yes'
 vim.wo.number = true
 opt.relativenumber = true
-vim.wo.signcolumn = 'yes'
 opt.guioptions = 'egmrti'
 opt.list = true
 opt.termguicolors = true
@@ -237,6 +297,22 @@ vim.keymap.set('v', 'J', ":m '>+1<cr>gv=gv")
 vim.keymap.set('v', 'K', ":m '<-2<CR>gv=gv")
 -- term
 vim.keymap.set('t', '<ESC>', '<C-\\><C-n>')
+vim.keymap.set('n', 'sh', '<cmd>split | wincmd j | resize 20 | terminal<CR>')
+local autocmd = vim.api.nvim_create_autocmd
+autocmd('TermOpen', {
+  pattern = '*',
+  callback = function()
+    vim.cmd('startinsert')
+    vim.opt_local.signcolumn = 'no'
+    vim.opt_local.number = false
+    vim.opt_local.relativenumber = false
+  end
+})
+
+-- split buffer
+vim.keymap.set('n', 'sv', '<cmd>vsplit<CR>')
+vim.keymap.set('n', 'ss', '<cmd>split<CR>')
+
 
 vim.keymap.set('n', 'j', 'gj')
 vim.keymap.set('n', 'k', 'gk')
@@ -322,34 +398,48 @@ require('rose-pine').setup({
     ColorColumn = { bg = 'rose' }
   }
 })
+vim.opt.background = 'light'
 vim.cmd('colorscheme rose-pine')
 
 vim.keymap.set('n', 'ge', '<cmd>Fern . -reveal=%<CR>')
 
 -- 1. LSP Sever management
 require('mason').setup()
-require('mason-lspconfig').setup_handlers({ function(server)
-  local opt = {
-    -- -- Function executed when the LSP server startup
-    -- on_attach = function(client, bufnr)
-    --   local opts = { noremap=true, silent=true }
-    --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
-    --   vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
-    -- end,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(
-      vim.lsp.protocol.make_client_capabilities()
-    )
-  }
-  require('lspconfig')[server].setup(opt)
-end })
+require('mason-lspconfig').setup_handlers({
+  function(server)
+    local opt = {
+      -- -- Function executed when the LSP server startup
+      -- on_attach = function(client, bufnr)
+      --   local opts = { noremap=true, silent=true }
+      --   vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+      --   vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
+      -- end,
+      on_attach = function(client, bufnr)
+        require("nvim-navic").attach(client, bufnr)
+      end,
+      capabilities = require('cmp_nvim_lsp').update_capabilities(
+        vim.lsp.protocol.make_client_capabilities()
+      )
+    }
+    require('lspconfig')[server].setup(opt)
+  end,
+  ["volar"] = function()
+    require('lspconfig').volar.setup {
+      -- init_options = {
+      --   typescript = {
+      --     serverPath = ''
+      --   }
+      -- }
+    }
+  end
+})
 
 -- 2. build-in LSP function
 -- keyboard shortcut
-vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+vim.keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>')
 vim.keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 vim.keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 vim.keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
-vim.keymap.set('n', 'gt', '<cmd>lua vim.lsp.buf.type_definition()<CR>')
 
 -- 3. completion (hrsh7th/nvim-cmp)
 local cmp = require("cmp")
@@ -378,14 +468,11 @@ cmp.setup({
 
 -- 4. UI (lspsaga)
 local saga = require 'lspsaga'
-require("nvim-gps").setup()
-require('winbar').setup({
-  enable = true
-})
 -- use default config
 saga.init_lsp_saga({
-  symbol_in_winbar = {
-      in_custom = true
+  show_outline = {
+    auto_enter = true,
+    auto_refresh = true,
   }
 })
 -- keyboard shortcut
@@ -397,6 +484,7 @@ vim.keymap.set("v", "ga", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = 
 vim.keymap.set("n", "g]", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
 vim.keymap.set("n", "g[", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
 vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
+vim.keymap.set("n", "<C-f><C-v>", "<Cmd>LSoutlineToggle<CR>", { silent = true })
 
 -- 5. diagnostic (trouble.nvim)
 local trouble = require 'trouble'
@@ -489,4 +577,4 @@ vim.keymap.set("n", "<C-g>", "<cmd>Telescope live_grep<CR>")
 vim.keymap.set("n", "<C-m><C-l>", "<cmd>Telescope memo list<CR>")
 
 -- others
-vim.cmd('source ~/.config/nvim/statusline.vim')
+-- vim.cmd('source ~/.config/nvim/statusline.vim')
