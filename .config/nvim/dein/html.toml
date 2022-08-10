@@ -1,5 +1,0 @@
-[[plugins]]
-repo =  'mattn/emmet-vim'
-on_ft=['html', 'css']
-
-
