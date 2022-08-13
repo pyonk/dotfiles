@@ -28,7 +28,10 @@ require('packer').startup(function(use)
   use { 'rose-pine/neovim', as = 'rose-pine' }
   use {
     'nvim-treesitter/nvim-treesitter',
-    requires = { 'JoosepAlviste/nvim-ts-context-commentstring' },
+    requires = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+      'windwp/nvim-ts-autotag'
+    },
     config = [[require('config.tree_sitter')]]
   }
   use {
@@ -94,6 +97,12 @@ require('packer').startup(function(use)
     'klen/nvim-test',
     config = [[require('config.nvim_test')]]
   }
+  use {
+    'windwp/nvim-autopairs',
+      config = function()
+        require('nvim-autopairs').setup {}
+      end
+  }
   -- non lua plugins
   use { 'tpope/vim-commentary' }
   use {
@@ -122,6 +131,13 @@ require('packer').startup(function(use)
       requires = { 'vim-denops/denops.vim' },
       config = [[require('config.gin')]]
     }
+  }
+  use { 'machakann/vim-sandwich' }
+  use {
+    'simeji/winresizer',
+    config = [[require('config.winresizer')]],
+    opt = true,
+    keys = {'n', '<C-e>'}
   }
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
