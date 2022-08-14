@@ -26,3 +26,32 @@ keymap.set('n', 'j', 'gj')
 keymap.set('n', 'k', 'gk')
 keymap.set('v', 'j', 'gj')
 keymap.set('v', 'k', 'gk')
+
+-- build-in LSP function
+keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>')
+keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
+keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
+keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')
+
+vim.api.nvim_exec(
+[[
+function! s:same_indent(dir) abort
+  let lnum = line('.')
+  let width = col('.') <= 1 ? 0 : strdisplaywidth(matchstr(getline(lnum)[: col('.')-2], '^\s*'))
+  while 1 <= lnum && lnum <= line('$')
+    let lnum += (a:dir ==# '+' ? 1 : -1)
+    let line = getline(lnum)
+    if width >= strdisplaywidth(matchstr(line, '^\s*')) && line =~# '^\s*\S'
+      break
+    endif
+  endwhile
+  return abs(line('.') - lnum) . a:dir
+endfunction
+nnoremap <expr><silent> sj <SID>same_indent('+')
+nnoremap <expr><silent> sk <SID>same_indent('-')
+onoremap <expr><silent> sj <SID>same_indent('+')
+onoremap <expr><silent> sk <SID>same_indent('-')
+xnoremap <expr><silent> sj <SID>same_indent('+')
+xnoremap <expr><silent> sk <SID>same_indent('-')
+]], false
+)

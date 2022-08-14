@@ -8,16 +8,34 @@ end
 require('packer').startup(function(use)
   use { 'wbthomason/packer.nvim' }
   use { 'neovim/nvim-lspconfig' }
-  use { 'williamboman/mason.nvim' }
-  use { 'williamboman/mason-lspconfig.nvim' }
-  use { 'hrsh7th/nvim-cmp' }
-  use { 'hrsh7th/cmp-nvim-lsp' }
-  use { 'hrsh7th/vim-vsnip' }
-  use { 'hrsh7th/cmp-buffer' }
-  use { 'hrsh7th/cmp-path' }
-  use { 'glepnir/lspsaga.nvim', branch = 'main' }
-  use { "SmiteshP/nvim-navic", requires = "neovim/nvim-lspconfig" }
-  use { 'folke/trouble.nvim' }
+  use {
+    'williamboman/mason.nvim',
+    requires = { 'williamboman/mason-lspconfig.nvim' },
+    config = [[require('config.mason')]]
+  }
+  use {
+    'hrsh7th/nvim-cmp',
+    requires = {
+      'hrsh7th/cmp-nvim-lsp',
+      'hrsh7th/cmp-buffer',
+      'hrsh7th/cmp-path',
+      'hrsh7th/vim-vsnip',
+    },
+    config = [[require('config.nvim_cmp')]]
+  }
+  use {
+    'glepnir/lspsaga.nvim',
+    branch = 'main',
+    config = [[require('config.lspsaga')]]
+  }
+  use {
+    'SmiteshP/nvim-navic',
+    requires = "neovim/nvim-lspconfig"
+  }
+  use {
+    'folke/trouble.nvim',
+    config = [[require('config.trouble')]]
+  }
   use {
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
@@ -25,7 +43,11 @@ require('packer').startup(function(use)
     },
     config = [[require('config.null_ls')]]
   }
-  use { 'rose-pine/neovim', as = 'rose-pine' }
+  use {
+    'rose-pine/neovim',
+    as = 'rose-pine',
+    config = [[require('config.rose_pine')]]
+  }
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
@@ -42,6 +64,7 @@ require('packer').startup(function(use)
         'telescope-fzf-native.nvim',
         'delphinus/telescope-memo.nvim',
       },
+      config = [[require('config.telescope')]]
     },
     {
       'nvim-telescope/telescope-fzf-native.nvim',
@@ -116,7 +139,7 @@ require('packer').startup(function(use)
       'lambdalisue/fern-renderer-nerdfont.vim',
       'lambdalisue/nerdfont.vim',
     },
-    setup = 'vim.g["fern#renderer"] = [[nerdfont]]',
+    config = [[require('config.fern')]],
   }
   use {
     {
