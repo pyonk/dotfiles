@@ -44,6 +44,10 @@ require('packer').startup(function(use)
     config = [[require('config.null_ls')]]
   }
   use {
+    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
+    config = [[require('config.lsp_lines')]],
+  }
+  use {
     'rose-pine/neovim',
     as = 'rose-pine',
     config = [[require('config.rose_pine')]]
@@ -112,9 +116,7 @@ require('packer').startup(function(use)
       'kyazdani42/nvim-web-devicons',
       opt = true
     },
-    config = function()
-      require('lualine').setup()
-    end
+    config = [[require('config.lualine')]]
   }
   use {
     'klen/nvim-test',

@@ -57,3 +57,9 @@ vim.wo.colorcolumn = "88"
 vim.opt.cursorline = true
 
 vim.opt.expandtab = true
+
+
+vim.cmd([[sign define DiagnosticSignError text=💩 texthl=TextError]])
+vim.cmd([[sign define DiagnosticSignWarn  text=🤔 texthl=TextWarn ]])
+vim.cmd([[sign define DiagnosticSignInfo  text=ℹ️ texthl=TextInfo ]])
+vim.cmd([[sign define DiagnosticSignHint  text=💡 texthl=TextHint ]])

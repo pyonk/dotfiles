@@ -16,14 +16,5 @@ require('mason-lspconfig').setup_handlers({
       )
     }
     require('lspconfig')[server].setup(opt)
-  end,
-  ["volar"] = function()
-    require('lspconfig').volar.setup {
-      -- init_options = {
-      --   typescript = {
-      --     serverPath = ''
-      --   }
-      -- }
-    }
   end
 })
