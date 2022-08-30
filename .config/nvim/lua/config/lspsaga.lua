@@ -2,6 +2,9 @@ local saga = require('lspsaga')
 
 -- use default config
 saga.init_lsp_saga({
+  symbol_in_winbar = {
+    enable = true,
+  },
   show_outline = {
     auto_enter = true,
     auto_refresh = true,

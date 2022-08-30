@@ -4,3 +4,10 @@ require('lsp_lines').setup()
 vim.diagnostic.config({
   virtual_text = false,
 })
+
+vim.keymap.set(
+  "n",
+  "<C-c><C-l>",
+  require("lsp_lines").toggle,
+  { desc = "Toggle lsp_lines" }
+)

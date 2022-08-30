@@ -22,7 +22,9 @@ endfunction
 
 augroup vimrc-local
   autocmd!
-  autocmd BufNewFile,BufReadPost * call s:vimrc_local(expand('<afile>:p:h'))
+  autocmd BufNewFile,BufReadPost * call s:vimrc_local(
+  \ expand(fnameescape(fnamemodify(finddir('.git', escape(expand('%:p:h'), ' ') . ';'), ':h')))
+  \ )
 augroup END
 ]], false
 )

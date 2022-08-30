@@ -37,6 +37,10 @@ require('packer').startup(function(use)
     config = [[require('config.trouble')]]
   }
   use {
+    'folke/lsp-colors.nvim',
+    config = [[require('config.lsp_colors')]]
+  }
+  use {
     'jose-elias-alvarez/null-ls.nvim',
     requires = {
       'nvim-lua/plenary.nvim',
@@ -87,12 +91,8 @@ require('packer').startup(function(use)
   }
   use {
     'j-hui/fidget.nvim',
-    config = function()
-      require('fidget').setup()
-    end
+    config = [[require('config.fidget')]]
   }
-  use { 'gpanders/editorconfig.nvim' }
-  use { 'lukas-reineke/indent-blankline.nvim' }
   use {
     {
       'petertriho/nvim-scrollbar',
@@ -129,6 +129,7 @@ require('packer').startup(function(use)
       end
   }
   -- non lua plugins
+  use { 'editorconfig/editorconfig-vim' }
   use { 'tpope/vim-commentary' }
   use {
     'lambdalisue/gina.vim',
