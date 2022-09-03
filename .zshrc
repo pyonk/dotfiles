@@ -1,9 +1,9 @@
 export LANG=ja_JP.UTF-8
 
-eval "$(starship init zsh)"
-# fpath+=$HOME/.zsh/pure
-# autoload -U promptinit; promptinit
-# prompt pure
+# eval "$(starship init zsh)"
+fpath+=$HOME/.zsh/pure
+autoload -U promptinit; promptinit
+prompt pure
 
 source $HOME/.zsh/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
@@ -13,6 +13,7 @@ autoload -Uz compinit
 zstyle ':completion:*:default' menu select=2
 
 export XDG_CONFIG_HOME=$HOME/.config
+# export STARSHIP_CONFIG=$XDG_CONFIG_HOME/starship/starship.toml
 
 # if test -z $TMUX ; then
 # 	TMUX_CONF=$XDG_CONFIG_HOME/tmux/tmux.conf
