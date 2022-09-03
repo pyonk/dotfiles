@@ -91,11 +91,3 @@ echo ">> installed fast-syntax-highlighting"
 git_clone https://github.com/junegunn/fzf.git ~/.fzf
 yes | ~/.fzf/install
 echo ">> installed fzf"
-
-########
-# dein #
-########
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-sh ./installer.sh ~/.cache/dein
-rm ./installer.sh
-echo ">> installed dein.vim"
