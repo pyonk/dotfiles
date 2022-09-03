@@ -27,21 +27,6 @@
             ],
             "conditions":[
               {
-                "type":"frontmost_application_if",
-                "bundle_identifiers":[
-                  "^com\\.apple\\.Terminal$",
-                  "^org\\.vim\\.",
-                  "^com\\.googlecode\\.iterm2$",
-                  "^com\\.sublimetext\\.3$",
-                  "^org\\.gnu\\.Emacs$",
-                  "^io\\.alacritty$",
-                  "^com\\.google\\.android\\.studio$",
-                  "^com\\.microsoft\\.VSCode$",
-                  "^net\\.kovidgoyal\\.kitty$",
-                  "^com\\.jetbrains\\.intellij\\.ce$"
-                ]
-              },
-              {
                 "type":"input_source_if",
                 "input_sources":[
                   {
@@ -75,21 +60,6 @@
             }
           ],
           "conditions":[
-            {
-              "type":"frontmost_application_if",
-              "bundle_identifiers":[
-                "^com\\.apple\\.Terminal$",
-                "^org\\.vim\\.",
-                "^com\\.googlecode\\.iterm2$",
-                "^com\\.sublimetext\\.3$",
-                "^org\\.gnu\\.Emacs$",
-                "^io\\.alacritty$",
-                "^com\\.google\\.android\\.studio$",
-                "^com\\.microsoft\\.VSCode$",
-                "^net\\.kovidgoyal\\.kitty$",
-                "^com\\.jetbrains\\.intellij\\.ce$"
-              ]
-            },
             {
               "type":"input_source_if",
               "input_sources":[
