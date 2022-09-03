@@ -52,15 +52,15 @@ require('packer').startup(function(use)
     config = [[require('config.lsp_lines')]],
   }
   use {
-    'rose-pine/neovim',
-    as = 'rose-pine',
-    config = [[require('config.rose_pine')]]
+    'folke/tokyonight.nvim',
+    config = [[require('config.tokyonight')]]
   }
   use {
     'nvim-treesitter/nvim-treesitter',
     requires = {
       'JoosepAlviste/nvim-ts-context-commentstring',
-      'windwp/nvim-ts-autotag'
+      'windwp/nvim-ts-autotag',
+      'nvim-treesitter/playground'
     },
     config = [[require('config.tree_sitter')]]
   }

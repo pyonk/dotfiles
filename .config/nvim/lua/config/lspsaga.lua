@@ -8,6 +8,7 @@ saga.init_lsp_saga({
   show_outline = {
     auto_enter = true,
     auto_refresh = true,
+    fold_prefix = ''
   }
 })
 
