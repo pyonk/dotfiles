@@ -25,6 +25,9 @@
 !.config/kitty/
 !.config/kitty/**
 
+!.config/wezterm/
+!.config/wezterm/**
+
 !.config/flake8
 
 !.config/git/
