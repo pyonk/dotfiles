@@ -33,6 +33,9 @@ require('packer').startup(function(use)
     requires = "neovim/nvim-lspconfig"
   }
   use {
+    requires = {
+      'kyazdani42/nvim-web-devicons'
+    },
     'folke/trouble.nvim',
     config = [[require('config.trouble')]]
   }

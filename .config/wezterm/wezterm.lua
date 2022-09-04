@@ -3,7 +3,7 @@ local wezterm = require 'wezterm'
 return {
   term = 'wezterm',
   use_ime = true,
-  font_size = 18,
+  font_size = 16,
   font = wezterm.font "FiraCode Nerd Font Mono",
   font_rules = {
     {
@@ -21,9 +21,6 @@ return {
     },
   },
   color_scheme = 'tokyonight-storm',
-  colors = {
-    compose_cursor = 'orange',
-  },
   force_reverse_video_cursor = true,
   line_height = 1.1,
   hide_tab_bar_if_only_one_tab = true,
@@ -41,7 +38,7 @@ return {
     {
       key = 'c',
       mods = 'LEADER',
-      action = wezterm.action.SpawnTab 'CurrentPaneDomain',
+      action = wezterm.action.SpawnCommandInNewTab { cwd="$HOME" },
     },
     {
       key = '-',

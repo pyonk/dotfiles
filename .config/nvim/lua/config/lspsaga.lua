@@ -9,6 +9,9 @@ saga.init_lsp_saga({
     auto_enter = true,
     auto_refresh = true,
     fold_prefix = ''
+  },
+  code_action_lightbulb = {
+    sign = false
   }
 })
 
@@ -21,5 +24,5 @@ vim.keymap.set("v", "ga", "<cmd><C-U>Lspsaga range_code_action<CR>", { silent = 
 vim.keymap.set("n", "g]", "<cmd>Lspsaga diagnostic_jump_next<CR>", { silent = true })
 vim.keymap.set("n", "g[", "<cmd>Lspsaga diagnostic_jump_prev<CR>", { silent = true })
 vim.keymap.set("n", "gs", "<Cmd>Lspsaga signature_help<CR>", { silent = true })
-vim.keymap.set("n", "<C-f><C-v>", "<Cmd>LSoutlineToggle<CR>", { silent = true })
+vim.keymap.set("n", "gv", "<Cmd>LSoutlineToggle<CR>", { silent = true })
 
