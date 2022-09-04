@@ -4,7 +4,7 @@ return {
   term = 'wezterm',
   use_ime = true,
   font_size = 16,
-  font = wezterm.font "FiraCode Nerd Font Mono",
+  font = wezterm.font_with_fallback { "FiraCode Nerd Font Mono", "Noto Sans Mono CJK JP" },
   font_rules = {
     {
       intensity = "Bold",
@@ -20,7 +20,7 @@ return {
       font = wezterm.font("Hack Nerd Font Mono", {weight="Bold", stretch="Normal", style="Normal", italic=true})
     },
   },
-  color_scheme = 'tokyonight-storm',
+  color_scheme = 'tokyonight-day',
   force_reverse_video_cursor = true,
   line_height = 1.1,
   hide_tab_bar_if_only_one_tab = true,
