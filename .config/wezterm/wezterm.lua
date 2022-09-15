@@ -4,23 +4,8 @@ return {
   term = 'wezterm',
   use_ime = true,
   font_size = 16,
-  font = wezterm.font_with_fallback { "FiraCode Nerd Font Mono", "Noto Sans Mono CJK JP" },
-  font_rules = {
-    {
-      intensity = "Bold",
-      font = wezterm.font("FiraCode Nerd Font Mono", {weight="Bold", stretch="Normal", style="Normal"})
-    },
-    {
-      italic = true,
-      font = wezterm.font("Hack Nerd Font Mono", {weight="Regular", stretch="Normal", style="Normal", italic=true})
-    },
-    {
-      italic = true,
-      intensity = "Bold",
-      font = wezterm.font("Hack Nerd Font Mono", {weight="Bold", stretch="Normal", style="Normal", italic=true})
-    },
-  },
-  color_scheme = 'tokyonight-day',
+  font = wezterm.font_with_fallback { "UDEV Gothic 35NFLG" },
+  color_scheme = 'tokyonight-storm',
   force_reverse_video_cursor = true,
   line_height = 1.1,
   hide_tab_bar_if_only_one_tab = true,
