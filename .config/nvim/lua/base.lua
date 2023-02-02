@@ -6,6 +6,7 @@ vim.opt.shiftwidth = 2
 vim.opt.tabstop = 2
 vim.opt.smarttab = true
 vim.opt.smartindent = true
+vim.opt.cindent = true
 vim.opt.listchars = { tab = '»-', trail = '-', extends = '»', precedes = '«', nbsp = '%' }
 vim.opt.fillchars = { eob = ' ', vert = ' ' }
 vim.opt.diffopt:append {'vertical'}

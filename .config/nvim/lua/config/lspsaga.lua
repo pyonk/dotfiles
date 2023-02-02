@@ -1,16 +1,14 @@
 local saga = require('lspsaga')
 
 -- use default config
-saga.init_lsp_saga({
+saga.setup({
   symbol_in_winbar = {
-    enable = true,
+    enable = false,
   },
-  show_outline = {
-    auto_enter = true,
-    auto_refresh = true,
-    fold_prefix = ''
+  ui = {
+    title = false,
   },
-  code_action_lightbulb = {
+  lightbulb = {
     sign = false
   }
 })

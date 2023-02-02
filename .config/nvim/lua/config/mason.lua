@@ -11,7 +11,7 @@ require('mason-lspconfig').setup_handlers({
       on_attach = function(client, bufnr)
         require("nvim-navic").attach(client, bufnr)
       end,
-      capabilities = require('cmp_nvim_lsp').update_capabilities(
+      capabilities = require('cmp_nvim_lsp').default_capabilities(
         vim.lsp.protocol.make_client_capabilities()
       )
     }
@@ -28,4 +28,9 @@ require('mason-lspconfig').setup_handlers({
       }
     }
   end,
+  ["emmet_ls"] = function ()
+    require("lspconfig").emmet_ls.setup({
+      filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
+    })
+  end
 })

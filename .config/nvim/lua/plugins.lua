@@ -1,176 +1,174 @@
-local fn = vim.fn
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
-if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = fn.system({'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path})
-  vim.cmd [[packadd packer.nvim]]
+local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system({
+    "git",
+    "clone",
+    "--filter=blob:none",
+    "https://github.com/folke/lazy.nvim.git",
+    "--branch=stable", -- latest stable release
+    lazypath,
+  })
 end
-
-require('packer').startup(function(use)
-  use { 'wbthomason/packer.nvim' }
-  use { 'neovim/nvim-lspconfig' }
-  use {
+vim.opt.rtp:prepend(lazypath)
+require("lazy").setup({
+  { 'wbthomason/packer.nvim' },
+  { 'neovim/nvim-lspconfig' },
+  {
     'williamboman/mason.nvim',
-    requires = { 'williamboman/mason-lspconfig.nvim' },
-    config = [[require('config.mason')]]
-  }
-  use {
+    dependencies = { 'williamboman/mason-lspconfig.nvim' },
+    config = function() require('config.mason') end
+  },
+  {
     'hrsh7th/nvim-cmp',
-    requires = {
+    dependencies = {
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-buffer',
       'hrsh7th/cmp-path',
       'hrsh7th/vim-vsnip',
     },
-    config = [[require('config.nvim_cmp')]]
-  }
-  use {
+    config = function() require('config.nvim_cmp') end
+  },
+  {
     'glepnir/lspsaga.nvim',
     branch = 'main',
-    config = [[require('config.lspsaga')]]
-  }
-  use {
+    config = function() require('config.lspsaga') end
+  },
+  {
     'SmiteshP/nvim-navic',
-    requires = "neovim/nvim-lspconfig"
-  }
-  use {
-    requires = {
+    dependencies = "neovim/nvim-lspconfig"
+  },
+  {
+    dependencies = {
       'kyazdani42/nvim-web-devicons'
     },
     'folke/trouble.nvim',
-    config = [[require('config.trouble')]]
-  }
-  use {
+    config = function() require('config.trouble') end
+  },
+  {
     'folke/lsp-colors.nvim',
-    config = [[require('config.lsp_colors')]]
-  }
-  use {
+    config = function() require('config.lsp_colors') end
+  },
+  {
     'jose-elias-alvarez/null-ls.nvim',
-    requires = {
+    dependencies = {
       'nvim-lua/plenary.nvim',
     },
-    config = [[require('config.null_ls')]]
-  }
-  use {
+    config = function() require('config.null_ls') end
+  },
+  {
     'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    config = [[require('config.lsp_lines')]],
-  }
-  use {
+    config = function() require('config.lsp_lines') end,
+  },
+  {
     'folke/tokyonight.nvim',
-    config = [[require('config.tokyonight')]]
-  }
-  use {
+    config = function() require('config.tokyonight') end
+  },
+  {
     'nvim-treesitter/nvim-treesitter',
-    requires = {
+    dependencies = {
       'JoosepAlviste/nvim-ts-context-commentstring',
       'windwp/nvim-ts-autotag',
       'nvim-treesitter/playground'
     },
-    config = [[require('config.tree_sitter')]]
-  }
-  use {
-    {
-      'nvim-telescope/telescope.nvim',
-      requires = {
-        'nvim-lua/plenary.nvim',
-        'telescope-fzf-native.nvim',
-        'delphinus/telescope-memo.nvim',
-      },
-      config = [[require('config.telescope')]]
+    config = function() require('config.tree_sitter') end
+  },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = {
+      'nvim-lua/plenary.nvim',
+      'telescope-fzf-native.nvim',
+      'delphinus/telescope-memo.nvim',
     },
-    {
-      'nvim-telescope/telescope-fzf-native.nvim',
-      run = 'make'
-    },
-  }
-  use {
+    config = function() require('config.telescope') end
+  },
+  {
+    'nvim-telescope/telescope-fzf-native.nvim',
+    build = 'make'
+  },
+  {
     'lewis6991/gitsigns.nvim',
     config = function()
       require('gitsigns').setup()
     end
-  }
-  use {
+  },
+  {
     'phaazon/hop.nvim',
-    config = [[require('config.hop')]]
-  }
-  use {
+    config = function() require('config.hop') end
+  },
+  {
     'j-hui/fidget.nvim',
-    config = [[require('config.fidget')]]
-  }
-  use {
-    {
-      'petertriho/nvim-scrollbar',
-      requires = { 'nvim-hlslens' },
-      config = [[require('config.scrollbar')]]
-    },
-    {
-      'kevinhwang91/nvim-hlslens',
-      config = [[require('config.hlslens')]]
-    }
-  }
-  use {
+    config = function() require('config.fidget') end
+  },
+  {
+    'petertriho/nvim-scrollbar',
+    dependencies = { 'nvim-hlslens' },
+    config = function() require('config.scrollbar') end
+  },
+  {
+    'kevinhwang91/nvim-hlslens',
+    config = function() require('config.hlslens') end
+  },
+  {
     'norcalli/nvim-colorizer.lua',
     config = function()
       require'colorizer'.setup()
     end
-  }
-  use {
+  },
+  {
     'nvim-lualine/lualine.nvim',
-    requires = {
+    dependencies = {
       'kyazdani42/nvim-web-devicons',
       opt = true
     },
-    config = [[require('config.lualine')]]
-  }
-  use {
+    config = function() require('config.lualine') end
+  },
+  {
     'klen/nvim-test',
-    config = [[require('config.nvim_test')]]
-  }
-  use {
+    config = function() require('config.nvim_test') end
+  },
+  {
     'windwp/nvim-autopairs',
       config = function()
         require('nvim-autopairs').setup {}
       end
-  }
+  },
   -- non lua plugins
-  use { 'editorconfig/editorconfig-vim' }
-  use { 'tpope/vim-commentary' }
-  use {
+  { 'editorconfig/editorconfig-vim' },
+  { 'tpope/vim-commentary' },
+  {
     'lambdalisue/gina.vim',
-    config = [[require('config.gina')]]
-  }
-  use {
+    config = function() require('config.gina') end
+  },
+  {
     'lambdalisue/fern.vim',
-    requires = {
+    dependencies = {
       'lambdalisue/fern-git-status.vim',
       'lambdalisue/fern-renderer-nerdfont.vim',
       'lambdalisue/nerdfont.vim',
     },
-    config = [[require('config.fern')]],
-  }
-  use {
+    config = function() require('config.fern') end,
+  },
+  {
     {
       'vim-denops/denops.vim'
     },
     {
       'lambdalisue/guise.vim',
-      requires = { 'vim-denops/denops.vim' }
+      dependencies = { 'vim-denops/denops.vim' },
     },
     {
       'lambdalisue/gin.vim',
-      requires = { 'vim-denops/denops.vim' },
-      config = [[require('config.gin')]]
-    }
-  }
-  use { 'machakann/vim-sandwich' }
-  use {
+      dependencies = { 'vim-denops/denops.vim' },
+      config = function() require('config.gin') end
+    },
+  },
+  { 'machakann/vim-sandwich' },
+  {
     'simeji/winresizer',
-    config = [[require('config.winresizer')]],
+    config = function() require('config.winresizer') end,
     opt = true,
-    keys = {'n', '<C-e>'}
-  }
-  -- Automatically set up your configuration after cloning packer.nvim
-  -- Put this at the end after all plugins
-  if packer_bootstrap then
-    require('packer').sync()
-  end
-end)
+    keys = {'n', '<C-e>'},
+  },
+ { 'fatih/vim-go' },
+})
+
