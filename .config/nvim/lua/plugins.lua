@@ -56,10 +56,6 @@ require("lazy").setup({
     config = function() require('config.null_ls') end
   },
   {
-    'https://git.sr.ht/~whynothugo/lsp_lines.nvim',
-    config = function() require('config.lsp_lines') end,
-  },
-  {
     'folke/tokyonight.nvim',
     config = function() require('config.tokyonight') end
   },
