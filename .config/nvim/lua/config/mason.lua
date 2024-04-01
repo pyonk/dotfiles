@@ -9,7 +9,10 @@ require('mason-lspconfig').setup_handlers({
       --   vim.cmd 'autocmd BufWritePre * lua vim.lsp.buf.formatting_sync(nil, 1000)'
       -- end,
       on_attach = function(client, bufnr)
-        require("nvim-navic").attach(client, bufnr)
+        local navic = require("nvim-navic")
+        if client.server_capabilities.documentSymbolProvider then
+            navic.attach(client, bufnr)
+        end
       end,
       capabilities = require('cmp_nvim_lsp').default_capabilities(
         vim.lsp.protocol.make_client_capabilities()

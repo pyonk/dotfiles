@@ -48,7 +48,6 @@ vim.opt.ruler = true
 vim.wo.signcolumn = 'yes'
 vim.wo.number = true
 vim.opt.relativenumber = true
-vim.opt.guioptions = 'egmrti'
 vim.opt.list = true
 vim.opt.termguicolors = true
 -- true color

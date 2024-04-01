@@ -28,7 +28,7 @@ keymap.set('v', 'j', 'gj')
 keymap.set('v', 'k', 'gk')
 
 -- build-in LSP function
-keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>')
+-- keymap.set('n', 'gf', '<cmd>lua vim.lsp.buf.format({ async = true })<CR>')
 keymap.set('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>')
 keymap.set('n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>')
 keymap.set('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>')

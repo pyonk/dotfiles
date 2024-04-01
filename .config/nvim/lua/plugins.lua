@@ -49,11 +49,12 @@ require("lazy").setup({
     config = function() require('config.lsp_colors') end
   },
   {
-    'jose-elias-alvarez/null-ls.nvim',
-    dependencies = {
-      'nvim-lua/plenary.nvim',
-    },
-    config = function() require('config.null_ls') end
+    'mhartington/formatter.nvim',
+    config = function() require('config.formatter') end
+  },
+  {
+    'mfussenegger/nvim-lint',
+    config = function() require('config.nvim-lint') end
   },
   {
     'folke/tokyonight.nvim',
@@ -73,6 +74,11 @@ require("lazy").setup({
     dependencies = {
       'nvim-lua/plenary.nvim',
       'telescope-fzf-native.nvim',
+      {
+        name = 'telescope-hugo.nvim',
+        dev = true,
+        dir = '/Users/pyonk/dev/pyonk/telescope-hugo.nvim/'
+      },
       'delphinus/telescope-memo.nvim',
     },
     config = function() require('config.telescope') end
@@ -88,7 +94,7 @@ require("lazy").setup({
     end
   },
   {
-    'phaazon/hop.nvim',
+    'smoka7/hop.nvim',
     config = function() require('config.hop') end
   },
   {
