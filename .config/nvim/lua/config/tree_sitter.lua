@@ -1,8 +1,5 @@
 require'nvim-treesitter.configs'.setup {
-  context_commentstring = {
-    enable = true
-  },
-  autotag = {
+ autotag = {
     enable = true
   },
   -- A list of parser names, or "all"

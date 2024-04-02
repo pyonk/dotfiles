@@ -50,15 +50,6 @@ vim.wo.number = true
 vim.opt.relativenumber = true
 vim.opt.list = true
 vim.opt.termguicolors = true
--- true color
-vim.o.t_8f = '<Esc>[38;2;%lu;%lu;%lum'
-vim.o.t_8b = '<Esc>[48;2;%lu;%lu;%lum'
--- undercurl
-vim.o.t_Cs = 'e[4:3m'
-vim.o.t_Ce = 'e[4:0m'
--- italic
-vim.o.t_ZH = '^[[3m'
-vim.o.t_ZR = '^[[23m'
 
 vim.wo.colorcolumn = "88"
 vim.opt.cursorline = true
