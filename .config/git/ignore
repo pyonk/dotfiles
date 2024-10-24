@@ -2,4 +2,5 @@
 .vimrc.local
 .DS_Store
 .envrc
+.direnv
 .tool-versions

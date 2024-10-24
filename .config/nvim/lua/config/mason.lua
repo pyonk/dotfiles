@@ -35,5 +35,18 @@ require('mason-lspconfig').setup_handlers({
     require("lspconfig").emmet_ls.setup({
       filetypes = { 'html', 'typescriptreact', 'javascriptreact', 'css', 'sass', 'scss', 'less' },
     })
+  end,
+  ["pyright"] = function ()
+    require("lspconfig").pyright.setup({
+      settings = {
+        python = {
+          venvPath = ".",
+          pythonPath = "./.venv/bin/python",
+          analysis = {
+            extraPaths = {"."}
+          }
+        }
+      }
+    })
   end
 })

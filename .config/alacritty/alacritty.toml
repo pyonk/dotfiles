@@ -22,4 +22,4 @@ args = ["-l", "-c", "tmux attach || tmux"]
 program = "/bin/zsh"
 
 [window]
-decorations = "none"
+decorations = "transparent"

@@ -8,10 +8,10 @@
 	br = branch
 	ci = commit
 	st = status
-[pager]
-	log = diff-highlight | less
-	show = diff-highlight | less
-	diff = diff-highlight | less
+#[pager]
+#	log = diff-highlight | less
+#	show = diff-highlight | less
+#	diff = diff-highlight | less
 [color]
 	ui = auto
 [init]
