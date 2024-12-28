@@ -1,0 +1,12 @@
+# The syntax is "key = value". The whitespace around the
+# equals doesn't matter.
+theme = "tokyonight-moon"
+
+# Comments start with a `#` and are only valid on their own line.
+# Blank lines are ignored!
+
+# Empty values reset the configuration to the default value
+font-family = FiraCode Nerd Font Mono
+
+background-opacity = 0.9
+
