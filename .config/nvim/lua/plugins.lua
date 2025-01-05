@@ -45,7 +45,7 @@ require("lazy").setup({
 	},
 	{
 		dependencies = {
-			"kyazdani42/nvim-web-devicons",
+			"nvim-tree/nvim-web-devicons",
 		},
 		"folke/trouble.nvim",
 		config = function()
@@ -83,22 +83,14 @@ require("lazy").setup({
 	},
 	{
 		"nvim-telescope/telescope.nvim",
-		dependencies = {
-			"nvim-lua/plenary.nvim",
-			"telescope-fzf-native.nvim",
-			{
-				name = "telescope-hugo.nvim",
-				dev = true,
-				dir = "/Users/pyonk/dev/pyonk/telescope-hugo.nvim/",
-			},
-			"delphinus/telescope-memo.nvim",
-		},
+		dependencies = { "nvim-lua/plenary.nvim" },
 		config = function()
 			require("config.telescope")
 		end,
 	},
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",
+		dependencies = { "nvim-telescope/telescope.nvim" },
 		build = "make",
 	},
 	{
